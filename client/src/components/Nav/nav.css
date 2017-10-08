@@ -1,0 +1,31 @@
+/* This section Added By Noor*/
+body {
+  fontfamily:sans-serif;
+  font-family: "Open Sans", sans-serif;
+  font-size: 16px;  
+ background: radial-gradient(white, #EEF6F9);
+ color: #3FA564;
+            
+}
+
+h1, h2, h3, h4, h5, h6 {
+ font-family: "PT Serif", serif;
+}
+.navbar-brand {
+	
+	color:#fff;
+	font-size: 2em, strong;
+}
+
+.Login{
+ padding: 5px 10px;
+    background: radial-gradient(lightblue, #EdF6F9);
+    border-radius:18px;
+    white-space: nowrap;
+    font-size: 14px;
+    padding-bottom:5px;
+}
+
+.container-fluid{
+	background: radial-gradient(lightblue, #EdF6F9);
+}
