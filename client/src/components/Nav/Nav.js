@@ -36,7 +36,7 @@ const Nav = () =>
       </ul>
     </div>
   </div>
-
+   <section className="picture"></section>
   </nav>;
 
 export default Nav;
