@@ -5,12 +5,13 @@ const candidateSchema = new Schema({
   firstname: { type: String, required: true },
   lastname: { type: String, required: true },
   email: { type: String, required: true },
-  address: { type: String, required: true },
-  city: { type: String, required: true },
-  state: { type: String, required: true },
-  zipcode: { type: String, required: true },
+  address: { type: String, required: false },
+  city: { type: String, required: false },
+  state: { type: String, required: false },
+  zipcode: { type: String, required: false },
   position_type: { type: String, required: true },
   resume_url: { type: String, required: true },
+  resume_text: { type: String, required: true },
   date: { type: Date, default: Date.now }
 });
 

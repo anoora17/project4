@@ -2,7 +2,7 @@ const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
 const reviewSchema = new Schema({
-  rating: { type: Int, required: true },
+  rating: { type: Number, required: true },
   comment: { type: String, required: true },
   manager: {
     type: Schema.Types.ObjectId,
