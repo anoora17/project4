@@ -1,7 +1,10 @@
 import React, { Component } from "react";
 import DeleteBtn from "../../components/DeleteBtn";
+import ReviewBtn from "../../components/ReviewBtn";
+import Modal from "../../components/Modal";
 import Jumbotron from "../../components/Jumbotron";
 import candidateAPI from "../../utils/candidateAPI";
+import reviewAPI from "../../utils/reviewAPI";
 import { Link } from "react-router-dom";
 import { Col, Row, Container } from "../../components/Grid";
 import { List, ListItem } from "../../components/List";
@@ -39,6 +42,14 @@ class Candidates extends Component {
     candidateAPI.deleteCandidate(id)
       .then(res => this.loadCandidates())
       .catch(err => console.log(err));
+  };
+
+  reviewCandidate = id => {
+    
+    reviewAPI.saveReview(id)
+      .then(res => this.loadCandidates())
+      .catch(err => console.log(err));
+
   };
 
   handleInputChange = event => {
@@ -158,7 +169,9 @@ class Candidates extends Component {
                         {candidate.position_type}: {candidate.firstname} {candidate.lastname}
                       </strong>
                     </Link>
+                    
                     <DeleteBtn onClick={() => this.deleteCandidate(candidate._id)} />
+                    <ReviewBtn onClick={() => this.reviewCandidate(candidate._id)} />
                   </ListItem>
                 ))}
               </List>
