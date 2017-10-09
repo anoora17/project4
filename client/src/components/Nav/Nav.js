@@ -9,9 +9,15 @@ const Nav = () =>
           <span className="icon-bar" /> <span className="icon-bar" />
           <span className="icon-bar" />
         </button>
+        
         <a href="/" className="navbar-brand">
           ACME Inc. Resume Database
         </a>
+        
+        <a href="/managers" className="navbar-brand">
+        Managers
+        </a>
+        
         <a href="/candidates" className="navbar-brand">
         Candidates
         </a>

@@ -3,10 +3,18 @@ import { Link } from "react-router-dom";
 import { Col, Row, Container } from "../../components/Grid";
 import Jumbotron from "../../components/Jumbotron";
 import candidateAPI from "../../utils/candidateAPI";
+import DeleteBtn from "../../components/DeleteBtn";
+import ReviewBtn from "../../components/ReviewBtn";
+import Modal from "../../components/Modal";
+import reviewAPI from "../../utils/reviewAPI";
+import { List, ListItem } from "../../components/List";
+import { Input, TextArea, FormBtn } from "../../components/Form";
+
 
 class Detail extends Component {
   state = {
-    candidate: {}
+    candidate: {},
+    review: []
   };
   
   componentDidMount() {
@@ -22,6 +30,7 @@ class Detail extends Component {
           <Col size="md-12">
             <Jumbotron>
               <h1>
+
                 Candidate: {this.state.candidate.firstname} {this.state.candidate.lastname}
                 Email: {this.state.candidate.email} 
                 Position Type: {this.state.candidate.position_type}
@@ -37,12 +46,13 @@ class Detail extends Component {
               <p>
                 {this.state.candidate.resume_text}
               </p>
+              
             </article>
           </Col>
         </Row>
         <Row>
           <Col size="md-2">
-            <Link to="/">← Back to Candidates</Link>
+            <Link to="/candidates">← Back to Candidates</Link>
           </Col>
         </Row>
       </Container>
