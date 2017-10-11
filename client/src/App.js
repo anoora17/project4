@@ -7,10 +7,14 @@ import Nav from "./components/Nav";
 import Signin from "./pages/Signin";
 import Signup from "./pages/Signup";
 
+
+
+
 const App = () =>
   <Router>
     <div>
       <Nav  />
+       
       <Switch>
 
        <Route exact path="/login" component={Signin} />

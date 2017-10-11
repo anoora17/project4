@@ -1,10 +1,15 @@
 @media all and (min-width: 480px) {
-  .Login {
+  .signin {
     padding: 60px 0;
+     background: radial-gradient( #98AFC7,#E8E8E6);
   }
 
-  .Login form {
+  .signin form {
+  	border-radius:15px  5% / 20px;
     margin: 0 auto;
     max-width: 320px;
+    height: 800px;
+
+    
   }
 }

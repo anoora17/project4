@@ -1,0 +1,41 @@
+aws cognito-idp admin-confirm-sign-up --region us-east-1 -- --user-pool-id us-east-1_FNhgPoRdz --username nooraltaweel0101@gmail.com
+
+
+// Initialize the Amazon Cognito credentials provider
+CognitoCachingCredentialsProvider credentialsProvider = new CognitoCachingCredentialsProvider(
+    getApplicationContext(),
+    "us-east-1:e1924a8b-c3a8-4f28-a512-a377fcd22ec4", // Identity pool ID
+    Regions.US_EAST_1 // Region
+);
+
+
+
+// Initialize the Cognito Sync client
+CognitoSyncManager syncClient = new CognitoSyncManager(
+   getApplicationContext(),
+   Regions.US_EAST_1, // Region
+   credentialsProvider);
+
+// Create a record in a dataset and synchronize with the server
+Dataset dataset = syncClient.openOrCreateDataset("myDataset");
+dataset.put("myKey", "myValue");
+dataset.synchronize(new DefaultSyncCallback() {
+    @Override
+    public void onSuccess(Dataset dataset, List newRecords) {
+	//Your handler code here
+    }
+});
+
+Identity pool ID 
+us-east-1:e1924a8b-c3a8-4f28-a512-a377fcd22ec4
+Identity Pool ARN 
+arn:aws:cognito-identity:us-east-1:916413972278:identitypool/us-east-1:e1924a8b-c3a8-4f28-a512-a377fcd22ec4
+
+User Pool ID:us-east-1_FNhgPoRdz
+App CLient ID:5dcs150h21p32sapvoug0lkrc
+
+
+//testing user
+
+ aws cognito-idp sign-up  --region us-east-1 --client-id 5dcs150h21p32sapvoug0lkrc  --username naltaweel@aipla.org --password P@ssw0rd!
+aws cognito-idp admin-confirm-sign-up --region us-east-1 -- --user-pool-id us-east-1_FNhgPoRdz --username naltaweel@aipla.org

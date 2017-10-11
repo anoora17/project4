@@ -42,7 +42,7 @@ export default class Signup extends Component {
     });
   }
 
-  handleSubmit = async event => {
+  handleSubmit =  event => {
     event.preventDefault();
 
     this.setState({ isLoading: true });
@@ -52,10 +52,10 @@ export default class Signup extends Component {
     this.setState({ isLoading: false });
   }
 
-  handleConfirmationSubmit = async event => {
+  handleConfirmationSubmit = event => {
     event.preventDefault();
 
-    this.setState({ isLoading: true });
+    this.setState({isLoading: true });
   }
 
   renderConfirmationForm() {
@@ -127,7 +127,7 @@ export default class Signup extends Component {
 
   render() {
     return (
-      <div className="Signup">
+      <div className="signup">
         {this.state.newUser === null
           ? this.renderForm()
           : this.renderConfirmationForm()}
