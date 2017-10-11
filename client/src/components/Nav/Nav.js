@@ -62,7 +62,21 @@ constructor(props) {
               <span className="icon-bar"></span>
               <span className="icon-bar"></span>
             </button>
-            <a className="navbar-brand" href="/" ><strong>Resume App</strong></a>
+            <a href="/" className="navbar-brand">
+            ACME Inc. Resume Database
+          </a>
+          
+          <a href="/managers" className="navbar-brand">
+          Managers
+          </a>
+          
+          <a href="/candidates" className="navbar-brand">
+          Candidates
+          </a>
+
+          <a href="/allcand" className="navbar-brand">
+          Search Resumes
+          </a>
           </div>
 
     
@@ -88,6 +102,7 @@ constructor(props) {
           </li>
          </ul>
        </div>
+
     </div>
            <section className="picture"></section>
 

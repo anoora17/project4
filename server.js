@@ -17,7 +17,8 @@ app.use(routes);
 mongoose.Promise = global.Promise;
 // Connect to the Mongo DB
 mongoose.connect(
-  process.env.MONGODB_URI || "mongodb://localhost/resumeDB",
+
+  process.env.MONGODB_URI || "mongodb://localhost/ResumeDB",
   {
     useMongoClient: true
   }
@@ -27,3 +28,5 @@ mongoose.connect(
 app.listen(PORT, function() {
   console.log(`🌎  ==> API Server now listening on PORT ${PORT}!`);
 });
+
+

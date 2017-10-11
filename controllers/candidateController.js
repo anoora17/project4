@@ -1,6 +1,6 @@
 const db = require("../models");
 
-// Defining methods for the booksController
+// Defining methods for the candidateController
 module.exports = {
   findAll: function(req, res) {
     db.Candidate
@@ -33,5 +33,15 @@ module.exports = {
       .then(dbModel => dbModel.remove())
       .then(dbModel => res.json(dbModel))
       .catch(err => res.status(422).json(err));
+  },
+
+  find: function(req, res) {
+    db.Candidate
+      .find(req.query)
+      .sort({ score: { $meta: "textScore" } })
+      .then(dbModel => res.json(dbModel))
+      .catch(err => res.status(422).json(err));
+
+
   }
 };
