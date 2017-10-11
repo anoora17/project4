@@ -6,6 +6,7 @@ import { Link } from "react-router-dom";
 import { Col, Row, Container } from "../../components/Grid";
 import { List, ListItem } from "../../components/List";
 import { Input, TextArea, FormBtn } from "../../components/Form";
+import "./Books.css";
 
 class Books extends Component {
   state = {
@@ -58,8 +59,8 @@ class Books extends Component {
       <Container fluid>
         <Row>
           <Col size="md-6">
-            <Jumbotron>
-              <h1>What Books Should I Read?</h1>
+            <Jumbotron className="jumboOne">
+              <h1>Search for a candidate?</h1>
             </Jumbotron>
             <form>
               <Input
@@ -90,7 +91,8 @@ class Books extends Component {
           </Col>
           <Col size="md-6">
             <Jumbotron>
-              <h1>Books On My List</h1>
+              <h1>Candidates On My List</h1>
+              <img src=""/>
             </Jumbotron>
             {this.state.books.length ? (
               <List>
