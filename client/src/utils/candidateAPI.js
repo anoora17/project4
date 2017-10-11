@@ -16,5 +16,9 @@ export default {
   // Saves a candidate to the database
   saveCandidate: function(candidateData) {
     return axios.post("/api/candidate", candidateData);
+  },
+  //full text search candidate resume_text data
+  textsearchCandidate: function(query) {
+    return axios.get("/api/candidate", query);
   }
 };

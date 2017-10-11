@@ -12,6 +12,7 @@ const candidateSchema = new Schema({
   position_type: { type: String, required: true },
   resume_url: { type: String, required: true },
   resume_text: { type: String, required: true },
+  resume: { type: String, required: false},
   date: { type: Date, default: Date.now }
 });
 

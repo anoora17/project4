@@ -17,6 +17,10 @@ const Nav = () =>
           <a href="/candidates" className="navbar-brand">
           Candidates
           </a>
+
+          <a href="/allcand" className="navbar-brand">
+          Search Resumes
+          </a>
         </ul>
         <ul className="nav navbar-nav navbar-right">
           <li><a href="/managers"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>

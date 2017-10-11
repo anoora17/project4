@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import DeleteBtn from "../../components/DeleteBtn";
+import DelBtn from "../../components/DelBtn";
 import ReviewBtn from "../../components/ReviewBtn";
 import Modal from "../../components/Modal";
 import Jumbotron from "../../components/Jumbotron";
@@ -9,6 +10,8 @@ import { Link } from "react-router-dom";
 import { Col, Row, Container } from "../../components/Grid";
 import { List, ListItem } from "../../components/List";
 import { Input, TextArea, FormBtn } from "../../components/Form";
+
+
 
 
 class Candidates extends Component {
@@ -23,7 +26,8 @@ class Candidates extends Component {
     zipcode: "",
     position_type: "",
     resume_url: "",
-    resume_text: ""
+    resume_text: "",
+    resume: ""
     };
 
   componentDidMount() {
@@ -72,12 +76,14 @@ class Candidates extends Component {
         zipcode: this.state.zipcode,
         position_type: this.state.position_type,
         resume_url: this.state.resume_url,
-        resume_text: this.state.resume_text
+        resume_text: this.state.resume_text,
+        resume: this.state.resume_url
       })
         .then(res => this.loadCandidates())
         .catch(err => console.log(err));
     }
   };
+
 
   render() {
     return (
@@ -142,6 +148,7 @@ class Candidates extends Component {
                 name="resume_url"
                 placeholder="Resume URL (required)"
               />
+              
               <TextArea
                 value={this.state.resume_text}
                 onChange={this.handleInputChange}

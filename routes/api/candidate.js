@@ -4,6 +4,7 @@ const candidateController = require("../../controllers/candidateController");
 // Matches with "/api/candidate"
 router.route("/")
   .get(candidateController.findAll)
+  .get(candidateController.find)
   .post(candidateController.create);
 
 // Matches with "/api/candidate/:id"
