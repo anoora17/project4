@@ -39,6 +39,7 @@ constructor(props) {
 
   handleLogout = event => {
     signOutUser()
+    window.location.replace("/login")
     this.userHasAuthenticated(false);
     this.props.history.push("/login");
     
@@ -69,7 +70,7 @@ constructor(props) {
             ACME Inc. Resume Database
           </a>
           
-          <a href="/managers" className="navbar-brand">
+          <a href="#" className="navbar-brand">
           Managers
           </a>
           

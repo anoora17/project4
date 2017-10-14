@@ -1,6 +1,6 @@
 import { CognitoUserPool } from "amazon-cognito-identity-js";
 import config from "../config";
-
+import managerAPI from "../utils/managerAPI";
 export async function authUser() {
   const currentUser = getCurrentUser();
 
@@ -40,5 +40,6 @@ function getCurrentUser() {
     UserPoolId: config.cognito.USER_POOL_ID,
     ClientId: config.cognito.APP_CLIENT_ID
   });
-  return userPool.getCurrentUser();
+      
+  return userPool.getCurrentUser()
 }
