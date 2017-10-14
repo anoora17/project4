@@ -1,15 +1,14 @@
 /* This section Added By Noor*/
 body {
-  fontfamily:sans-serif;
   font-family: "Open Sans", sans-serif;
   font-size: 16px;  
- background: radial-gradient(white, #EEF6F9);
- color: #3FA564;
+  background: radial-gradient(white, #EEF6F9);
+  color: #3FA564;
             
 }
 
 h1, h2, h3, h4, h5, h6 {
- font-family: "PT Serif", serif;
+ font-family: "Open Sans", "sans-seri";
 }
 .navbar-brand {
 	

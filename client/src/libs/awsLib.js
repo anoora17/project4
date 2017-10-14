@@ -1,14 +1,14 @@
 import { CognitoUserPool } from "amazon-cognito-identity-js";
 import config from "../config";
 
-export  function authUser() {
+export async function authUser() {
   const currentUser = getCurrentUser();
 
   if (currentUser === null) {
     return false;
   }
 
-  getUserToken(currentUser);
+  await getUserToken(currentUser);
 
   return true;
 }
@@ -18,6 +18,8 @@ export function signOutUser() {
 
   if (currentUser !== null) {
     currentUser.signOut();
+    window.location.replace("/")
+    
   }
 }
 
@@ -37,7 +39,6 @@ function getCurrentUser() {
   const userPool = new CognitoUserPool({
     UserPoolId: config.cognito.USER_POOL_ID,
     ClientId: config.cognito.APP_CLIENT_ID
-  })
+  });
   return userPool.getCurrentUser();
-
 }

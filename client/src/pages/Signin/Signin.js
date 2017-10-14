@@ -50,7 +50,7 @@ export default class Signin extends Component {
     });
   }
 
-  handleSubmit =  event => {
+  handleSubmit = async event => {
     event.preventDefault();
     this.setState({ isLoading: true });
 
@@ -58,9 +58,9 @@ export default class Signin extends Component {
          this.login(this.state.email, this.state.password).then( err =>{
           if (err) { alert(err)}
             else {
-          
-           window.location.replace("/")
-          this.props.history.push("/");
+        
+            window.location.replace("/managers")
+          this.props.history.push("/managers");
           this.props.userHasAuthenticated(true);
           this.setState({ isLoading: false });
           }
@@ -68,6 +68,7 @@ export default class Signin extends Component {
        
         } catch (e) {
           alert(e);
+          this.setState({ isLoading: false });
       }
   }
 

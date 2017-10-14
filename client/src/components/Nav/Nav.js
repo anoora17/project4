@@ -1,9 +1,10 @@
 import React from "react";
 import { Component } from "react";
-import {  withRouter, Route} from "react-router-dom";
+import { Link, withRouter, Route} from "react-router-dom";
 import "./nav.css";
 import { authUser, signOutUser } from "../../libs/awsLib.js";
-import Routenav from "../Routenav"
+import Routenav from "../Routenav";
+import { NavItem, Navbar } from "react-bootstrap";
 
 
 /* This section Added By Noor*/
@@ -19,9 +20,9 @@ constructor(props) {
     this.userHasAuthenticated = this.userHasAuthenticated.bind(this)
   }
 
-   componentDidMount() {
+  async componentDidMount() {
     try {
-       if ( authUser()) {
+       if ( await authUser()) {
         this.userHasAuthenticated(true);
        }
     }
@@ -39,7 +40,9 @@ constructor(props) {
   handleLogout = event => {
     signOutUser()
     this.userHasAuthenticated(false);
-     
+    this.props.history.push("/login");
+    
+   
 
   }
 
@@ -82,15 +85,17 @@ constructor(props) {
     
         <div className="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
           <ul className="nav navbar-nav">
-            <li className="active"><a href="#">All <span className="sr-only">(current)</span></a></li>
-            <li><a href="#">Saved Items</a></li>            
+            {/* <li className="active"><a href="#">All <span className="sr-only">(current)</span></a></li>
+            <li><a href="#">Saved Items</a></li>
+                         */}
+                     
           </ul>
       
           <ul className="nav navbar-nav navbar-right">        
             <li className="dropdown">
 
               {this.state.isAuthenticated
-                ? <a onClick={this.handleLogout} role="button" aria-haspopup="true" aria-expanded="false">Signout <span className="caret"></span></a>
+                ? <NavItem onClick={this.handleLogout}>Logout</NavItem>
               :[<a key={0} data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Login <span className="caret"></span></a>,
               <ul key={1} className="dropdown-menu">                  
                     <Routenav key={2} className ="Login" href="/login">Signin</Routenav>                          
@@ -103,13 +108,9 @@ constructor(props) {
          </ul>
        </div>
 
-    </div>
-           <section className="picture"></section>
-
-   
-     <Route childProps={childProps} />
-   
-    
+     </div>
+     <section className="picture"></section>   
+     <Route childProps={childProps} />   
    
   </nav>
     );
