@@ -1,0 +1,20 @@
+
+@media all and (min-width: 480px) {
+.Resume form {
+    padding: 15px;
+  }
+  
+  .Resume form textarea {
+    height: 400px;
+    width: 50%;
+    font-size: 24px;
+  }
+
+
+}
+.Resumebtn {
+
+    padding-right: 40%;
+    padding-left: 40%;
+
+}

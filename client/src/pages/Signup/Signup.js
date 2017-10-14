@@ -13,6 +13,7 @@ import {
   AuthenticationDetails,
   CognitoUserPool
 } from "amazon-cognito-identity-js";
+import managerAPI from "../../utils/managerAPI";
 
 
 export default class Signup extends Component {
@@ -97,7 +98,7 @@ export default class Signup extends Component {
           reject(err);
           return;
         }
-
+        
         resolve(result.user);
       })
     );

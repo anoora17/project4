@@ -1,6 +1,6 @@
 import React from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
-import Books from "./pages/Books";
+import Resume from "./pages/Resume";
 import Home from "./pages/Home";
 import Candidates from "./pages/Candidate";
 import Manager from "./pages/Manager";
@@ -14,6 +14,7 @@ import Signup from "./pages/Signup";
 
 
 
+
 const App = () =>
   <Router>
     <div>
@@ -22,7 +23,7 @@ const App = () =>
 
        <Route exact path="/login" component={Signin} />
         <Route exact path="/signup" component = {Signup} />        
-       <Route exact path="/" component={Home} />
+       <Route exact path="/" component={Resume} />
         <Route exact path="/managers" component={Manager} />        
         <Route exact path="/candidates" component={Candidates} />
         <Route exact path="/candidates/:id" component={Detail} />
