@@ -66,7 +66,7 @@ class Managers extends Component {
         <Row>
           <Col size="md-6">
             <Jumbotron>
-              <h1>Enter New Manager</h1>
+              <h2>Enter New Manager</h2>
             </Jumbotron>
             <form>
               <Input
@@ -103,7 +103,7 @@ class Managers extends Component {
           </Col>
           <Col size="md-6">
             <Jumbotron>
-              <h1>ACME Inc. Managers</h1>
+              <h2>ACME Inc. Managers</h2>
             </Jumbotron>
             {this.state.managers.length ? (
               <List>

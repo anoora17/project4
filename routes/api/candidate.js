@@ -9,6 +9,10 @@ router.route("/")
 router.route("/txtSearch/:text")
 
 	.get(candidateController.find);
+
+router.route("/txtSearch/:restext")
+
+	.put(candidateController.update);
 // Matches with "/api/candidate/:id"
 router
   .route("/:id")

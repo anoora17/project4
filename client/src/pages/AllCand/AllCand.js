@@ -58,7 +58,7 @@ class AllCandidates extends Component {
         <Row>
           <Col size="md-6">
             <Jumbotron>
-              <h1>Enter New Candidate</h1>
+              <h2>Search the Candidate Repo</h2>
             </Jumbotron>
             <form>
               
@@ -80,7 +80,7 @@ class AllCandidates extends Component {
           </Col>
           <Col size="md-6">
             <Jumbotron>
-              <h1>Candidates in Database</h1>
+              <h2>Candidates in Database</h2>
             </Jumbotron>
             {this.state.candidates.length ? (
               <List>

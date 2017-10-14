@@ -21,5 +21,9 @@ export default {
   textsearchCandidate: function(query) {
     console.log(query);
     return axios.get("/api/candidate/txtSearch/" + query);
+  },
+  uploadeCandResume: function(id, resText) {
+    console.log("in the upload resume function");
+    return axios.post("/api/candidate/resupload"+ resText);
   }
 };

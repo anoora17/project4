@@ -7,10 +7,8 @@ const Home = () =>
     <Row>
       <Col size="md-12">
         <Jumbotron>
-          <h1>Welcome to ACME Inc. Resume Database</h1>
-          <h1>
-            ACME Inc. Resumes
-          </h1>
+          <h2>Welcome to ACME Inc. Resume Database</h2>
+          
         </Jumbotron>
       </Col>
     </Row>

@@ -3,6 +3,7 @@ import React, { Component } from "react";
 import DeleteBtn from "../../components/DeleteBtn";
 import DelBtn from "../../components/DelBtn";
 import ReviewBtn from "../../components/ReviewBtn";
+import UploadBtn from "../../components/UploadBtn";
 import Modal from "../../components/Modal";
 import Jumbotron from "../../components/Jumbotron";
 import candidateAPI from "../../utils/candidateAPI";
@@ -45,6 +46,15 @@ class Candidates extends Component {
 
   deleteCandidate = id => {
     candidateAPI.deleteCandidate(id)
+      .then(res => this.loadCandidates())
+      .catch(err => console.log(err));
+  };
+
+  uploadResume = id => {
+    
+    //This is where the new function needs to go
+    //new function
+    candidateAPI.uploadeCandResume(id, "")
       .then(res => this.loadCandidates())
       .catch(err => console.log(err));
   };
@@ -92,7 +102,7 @@ class Candidates extends Component {
         <Row>
           <Col size="md-6">
             <Jumbotron>
-              <h1>Enter New Candidate</h1>
+              <h2>Enter New Candidate</h2>
             </Jumbotron>
             <form>
               <Input
@@ -166,7 +176,7 @@ class Candidates extends Component {
           </Col>
           <Col size="md-6">
             <Jumbotron>
-              <h1>Candidates in Database</h1>
+              <h2>Candidates in Database</h2>
             </Jumbotron>
             {this.state.candidates.length ? (
               <List>
@@ -177,7 +187,7 @@ class Candidates extends Component {
                         {candidate.position_type}: {candidate.firstname} {candidate.lastname}
                       </strong>
                     </Link>
-                    
+                    <UploadBtn onClick={() => this.uploadResume(candidate._id)} />
                     <DeleteBtn onClick={() => this.deleteCandidate(candidate._id)} />
                     <ReviewBtn onClick={() => this.reviewCandidate(candidate._id)} />
                   </ListItem>

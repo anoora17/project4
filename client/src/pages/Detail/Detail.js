@@ -29,13 +29,13 @@ class Detail extends Component {
         <Row>
           <Col size="md-12">
             <Jumbotron>
-              <h1>
+              <h2>
 
                 Candidate: {this.state.candidate.firstname} {this.state.candidate.lastname}
                 Email: {this.state.candidate.email} 
                 Position Type: {this.state.candidate.position_type}
 
-              </h1>
+              </h2>
             </Jumbotron>
           </Col>
         </Row>
