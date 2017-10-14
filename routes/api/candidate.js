@@ -4,9 +4,11 @@ const candidateController = require("../../controllers/candidateController");
 // Matches with "/api/candidate"
 router.route("/")
   .get(candidateController.findAll)
-  .get(candidateController.find)
   .post(candidateController.create);
 
+router.route("/txtSearch/:text")
+
+	.get(candidateController.find);
 // Matches with "/api/candidate/:id"
 router
   .route("/:id")

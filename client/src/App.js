@@ -17,8 +17,7 @@ import Signup from "./pages/Signup";
 const App = () =>
   <Router>
     <div>
-      <Nav  />
-       
+      <Nav  /> 
       <Switch>
 
        <Route exact path="/login" component={Signin} />

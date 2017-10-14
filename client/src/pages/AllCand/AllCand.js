@@ -14,30 +14,14 @@ import { Input, TextArea, FormBtn } from "../../components/Form";
 
 
 
-class Candidates extends Component {
+class AllCandidates extends Component {
   state = {
     candidates: [],
     resume_text: ""
    
     };
 
-  componentDidMount() {
-    //this.loadCandidates();
-  }
-
-  loadCandidates = () => {
-    candidateAPI.getCandidates()
-      .then(res =>
-        this.setState({ candidates: res.data, resume_text: "" })
-      )
-      .catch(err => console.log(err));
-  };
-
-  deleteCandidate = id => {
-    candidateAPI.deleteCandidate(id)
-      .then(res => this.loadCandidates())
-      .catch(err => console.log(err));
-  };
+  
 
   reviewCandidate = id => {
     
@@ -57,10 +41,14 @@ class Candidates extends Component {
   handleFormSubmit = event => {
     event.preventDefault();
     if (this.state.resume_text) {
-      candidateAPI.textsearchCandidate({resume_text: this.state.resume_text})
-        .then(res => this.loadCandidates())
-        .catch(err => console.log(err));
+      console.log(this.state.resume_text);
+        candidateAPI.textsearchCandidate(this.state.resume_text)
+        .then(res =>
+        this.setState({ candidates: res.data, resume_text: "" })
+      )
+      .catch(err => console.log(err));
     }
+
   };
 
 
@@ -104,11 +92,11 @@ class Candidates extends Component {
                       </strong>
                     </Link>
                     
-                    <DeleteBtn onClick={() => this.deleteCandidate(candidate._id)} />
                     <ReviewBtn onClick={() => this.reviewCandidate(candidate._id)} />
                   </ListItem>
                 ))}
               </List>
+
             ) : (
               <h3>No Candidates Available</h3>
             )}
@@ -119,4 +107,4 @@ class Candidates extends Component {
   }
 }
 
-export default Candidates;
+export default AllCandidates;

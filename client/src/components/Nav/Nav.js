@@ -70,7 +70,7 @@ constructor(props) {
             ACME Inc. Resume Database
           </a>
           
-          <a href="#" className="navbar-brand">
+          <a href="/managers" className="navbar-brand">
           Managers
           </a>
           

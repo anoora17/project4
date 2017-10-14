@@ -9,9 +9,7 @@ const Home = () =>
         <Jumbotron>
           <h1>Welcome to ACME Inc. Resume Database</h1>
           <h1>
-            <span role="img" aria-label="Face With Rolling Eyes Emoji">
-              🙄
-            </span>
+            ACME Inc. Resumes
           </h1>
         </Jumbotron>
       </Col>

@@ -19,6 +19,7 @@ export default {
   },
   //full text search candidate resume_text data
   textsearchCandidate: function(query) {
-    return axios.get("/api/candidate", query);
+    console.log(query);
+    return axios.get("/api/candidate/txtSearch/" + query);
   }
 };
