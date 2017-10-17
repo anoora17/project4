@@ -56,7 +56,7 @@ class AllCandidates extends Component {
     return (
       <Container fluid>
         <Row>
-          <Col size="md-6">
+          <Col size="md-12">
             <Jumbotron>
               <h2>Search the Candidate Repo</h2>
             </Jumbotron>
@@ -78,10 +78,10 @@ class AllCandidates extends Component {
               </FormBtn>
             </form>
           </Col>
-          <Col size="md-6">
-            <Jumbotron>
-              <h2>Candidates in Database</h2>
-            </Jumbotron>
+          </Row>
+          <Row>
+          <Col size="md-12">
+            //need a label or header here
             {this.state.candidates.length ? (
               <List>
                 {this.state.candidates.map(candidate => (
@@ -100,6 +100,12 @@ class AllCandidates extends Component {
             ) : (
               <h3>No Candidates Available</h3>
             )}
+          </Col>
+        </Row>
+        <Row>
+          <Col size="md-12">
+              
+                      
           </Col>
         </Row>
       </Container>

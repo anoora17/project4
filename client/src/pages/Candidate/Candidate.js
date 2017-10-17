@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-
 import DeleteBtn from "../../components/DeleteBtn";
 import DelBtn from "../../components/DelBtn";
 import ReviewBtn from "../../components/ReviewBtn";
@@ -60,7 +59,9 @@ class Candidates extends Component {
   };
 
   reviewCandidate = id => {
-    
+    //open modal form here
+   
+
     reviewAPI.saveReview(id)
       .then(res => this.loadCandidates())
       .catch(err => console.log(err));
@@ -90,7 +91,11 @@ class Candidates extends Component {
         resume_text: this.state.resume_text,
         resume: this.state.resume_url
       })
-        .then(res => this.loadCandidates())
+        .then(res => 
+          
+
+
+          this.loadCandidates())
         .catch(err => console.log(err));
     }
   };
@@ -100,66 +105,93 @@ class Candidates extends Component {
     return (
       <Container fluid>
         <Row>
-          <Col size="md-6">
+          <Col size="md-12">
             <Jumbotron>
               <h2>Enter New Candidate</h2>
             </Jumbotron>
-            <form>
+          </Col>
+        </Row>
+        <form>
+        <Row>
+          <Col size="md-4">
               <Input
                 value={this.state.firstname}
                 onChange={this.handleInputChange}
                 name="firstname"
                 placeholder="Firstname (required)"
               />
+          </Col>
+          <Col size="md-4">
               <Input
                 value={this.state.lastname}
                 onChange={this.handleInputChange}
                 name="lastname"
                 placeholder="Lastname (required)"
               />
+          </Col>
+          <Col size="md-4">
               <Input
                 value={this.state.email}
                 onChange={this.handleInputChange}
                 name="email"
                 placeholder="Email (required)"
               />
+            </Col>
+        </Row>
+        <Row>
+            <Col size="md-4">
               <Input
                 value={this.state.address}
                 onChange={this.handleInputChange}
                 name="address"
                 placeholder="Address (Optional)"
               />
+            </Col>
+            <Col size="md-4">
               <Input
                 value={this.state.city}
                 onChange={this.handleInputChange}
                 name="city"
                 placeholder="City (Optional)"
               />
+            </Col>
+            <Col size="md-4">
               <Input
                 value={this.state.state}
                 onChange={this.handleInputChange}
                 name="state"
                 placeholder="State (Optional)"
               />
+            </Col>
+          </Row>
+          <Row>
+            <Col size="md-4">
               <Input
                 value={this.state.zipcode}
                 onChange={this.handleInputChange}
                 name="zipcode"
                 placeholder="Zipcode (Optional)"
               />
+            </Col>
+            <Col size="md-4">
               <Input
                 value={this.state.position_type}
                 onChange={this.handleInputChange}
                 name="position_type"
                 placeholder="Position Type (required)"
               />
+            </Col>
+            <Col size="md-4">
               <Input
                 value={this.state.resume_url}
                 onChange={this.handleInputChange}
                 name="resume_url"
                 placeholder="Resume URL (required)"
               />
-              
+            </Col>
+          </Row>
+          <Row>
+             <Col size="md-12">
               <TextArea
                 value={this.state.resume_text}
                 onChange={this.handleInputChange}
@@ -171,10 +203,13 @@ class Candidates extends Component {
                 onClick={this.handleFormSubmit}
               >
                 Submit Candidate
-              </FormBtn>
-            </form>
-          </Col>
-          <Col size="md-6">
+            </FormBtn>
+            </Col>
+          </Row>
+          </form>
+          
+          
+          <Col size="md-12">
             <Jumbotron>
               <h2>Candidates in Database</h2>
             </Jumbotron>
@@ -187,9 +222,10 @@ class Candidates extends Component {
                         {candidate.position_type}: {candidate.firstname} {candidate.lastname}
                       </strong>
                     </Link>
-                    <UploadBtn onClick={() => this.uploadResume(candidate._id)} />
+                    
                     <DeleteBtn onClick={() => this.deleteCandidate(candidate._id)} />
                     <ReviewBtn onClick={() => this.reviewCandidate(candidate._id)} />
+                    <UploadBtn onClick={() => this.uploadResume(candidate._id)} />
                   </ListItem>
                 ))}
               </List>
@@ -197,7 +233,7 @@ class Candidates extends Component {
               <h3>No Candidates Available</h3>
             )}
           </Col>
-        </Row>
+        
       </Container>
     );
   }

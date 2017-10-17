@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
+
 class Modal extends React.Component {
   render() {
     // Render nothing if the "show" prop is false
@@ -53,3 +54,5 @@ Modal.propTypes = {
 };
 
 export default Modal;
+
+
