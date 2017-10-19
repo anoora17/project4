@@ -3,8 +3,8 @@ import DeleteBtn from "../../components/DeleteBtn";
 import DelBtn from "../../components/DelBtn";
 import ReviewBtn from "../../components/ReviewBtn";
 import UploadBtn from "../../components/UploadBtn";
-import Modal from "../../components/Modal";
 import Jumbotron from "../../components/Jumbotron";
+import Modal from "react-modal";
 import candidateAPI from "../../utils/candidateAPI";
 import reviewAPI from "../../utils/reviewAPI";
 import { Link } from "react-router-dom";
@@ -12,11 +12,22 @@ import { Col, Row, Container } from "../../components/Grid";
 import { List, ListItem } from "../../components/List";
 import { Input, TextArea, FormBtn } from "../../components/Form";
 
-
+const customStyles = {
+  content : {
+    top                   : '50%',
+    left                  : '50%',
+    right                 : 'auto',
+    bottom                : 'auto',
+    marginRight           : '-50%',
+    transform             : 'translate(-50%, -50%)'
+  }
+};
 
 
 class Candidates extends Component {
-  state = {
+  constructor(props) {
+    super(props)
+  this.state = {
     candidates: [],
     firstname: "",
     lastname: "",
@@ -28,8 +39,13 @@ class Candidates extends Component {
     position_type: "",
     resume_url: "",
     resume_text: "",
-    resume: ""
+    resume: "",
+    SaveisOpen: false
+    
     };
+    this.toggleModal = this.toggleModal.bind(this);
+    
+  }
 
   componentDidMount() {
     this.loadCandidates();
@@ -75,6 +91,14 @@ class Candidates extends Component {
     });
   };
 
+  //function to set modal state for save success
+  toggleModal = () => {
+      console.log(this.state.SaveisOpen);
+      this.setState({SaveisOpen: !this.state.SaveisOpen});
+      console.log(this.state.SaveisOpen);
+    };
+
+
   handleFormSubmit = event => {
     event.preventDefault();
     if (this.state.firstname && this.state.lastname && this.state.email && this.state.position_type && this.state.resume_url) {
@@ -91,12 +115,12 @@ class Candidates extends Component {
         resume_text: this.state.resume_text,
         resume: this.state.resume_url
       })
-        .then(res => 
-          
-
-
-          this.loadCandidates())
+        .then(res =>
+          this.toggleModal(),
+         this.loadCandidates())
         .catch(err => console.log(err));
+        
+
     }
   };
 
@@ -199,14 +223,25 @@ class Candidates extends Component {
                 placeholder="Resume Text (Optional)"
               />
               <FormBtn
-                disabled={!(this.state.firstname && this.state.lastname && this.state.email && this.state.position_type && this.state.resume_url)}
+              disabled={!(this.state.firstname && this.state.lastname && this.state.email && this.state.position_type && this.state.resume_url)}
                 onClick={this.handleFormSubmit}
               >
                 Submit Candidate
             </FormBtn>
+            
             </Col>
           </Row>
           </form>
+          
+          <Modal isOpen={this.state.SaveisOpen}
+                  onRequestClose={this.toggleModal}
+                  contentLabel="Save Successful"
+                  style={customStyles}
+                  >
+                  <h2>Saved Candidate Data</h2>
+                  <button className="btn btn-success" onClick={this.toggleModal}>close</button>
+                  
+          </Modal>
           
           
           <Col size="md-12">
@@ -224,7 +259,6 @@ class Candidates extends Component {
                     </Link>
                     
                     <DeleteBtn onClick={() => this.deleteCandidate(candidate._id)} />
-                    <ReviewBtn onClick={() => this.reviewCandidate(candidate._id)} />
                     <UploadBtn onClick={() => this.uploadResume(candidate._id)} />
                   </ListItem>
                 ))}

@@ -29,6 +29,7 @@ export default class Resume extends Component {
 
   handleFileChange = event => {
     this.file = event.target.files[0];
+    console.log(this.file);
   }
 
   handleSubmit = async event => {
