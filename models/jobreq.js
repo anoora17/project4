@@ -5,12 +5,7 @@ const jobreqSchema = new Schema({
   title: { type: String, required: true },
   description: { type: String, required: true },
   salary: { type: Number },
-  reqskills: { type: String, required: true },
-  manager: {
-    type: Schema.Types.ObjectId,
-    ref: "Manager"
-  }
-  
+  reqskills: { type: String, required: true }  
 });
 
 const Jobreq = mongoose.model("Jobreq", jobreqSchema);

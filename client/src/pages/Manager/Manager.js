@@ -108,6 +108,7 @@ class Managers extends Component {
             {this.state.managers.length ? (
               <List>
                 {this.state.managers.map(manager => (
+                  
                   <ListItem key={manager._id}>
                     <Link to={"/managers/" + manager._id}>
                       <strong>

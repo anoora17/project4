@@ -14,10 +14,12 @@ mongoose.connect(
 
 const managerSeed = [
   {
-    fullname: "John Reynolds",
+    fullname: "Jeff Bridges",
     department: "NorthWest IT",
     email: "jreynolds@acme.com",
-    password: "test"
+    password: "test",
+    jobreq: [{title: "Systems Administrator", description: "Provides systems administration", salary: 100000.00, reqskills: "Win Server 2012 Admin, Active Directory"},
+    {title: "Software Developer", description: "Web App Devlopment", salary: 100000.00, reqskills: "React, Angular, Javascript"}]
   },
   {
     fullname: "Linda Shields",
