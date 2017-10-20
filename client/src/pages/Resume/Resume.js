@@ -2,7 +2,8 @@ import React, { Component } from "react";
 import { FormGroup, FormControl, ControlLabel } from "react-bootstrap";
 import LoaderButton from "../../components/LoaderButton";
 import config from "../../config";
-import "./Resume.css"
+import "./Resume.css";
+
 
 
 export default class Resume extends Component {
@@ -29,13 +30,39 @@ export default class Resume extends Component {
 
   handleFileChange = event => {
     this.file = event.target.files[0];
+
+    console.log(this.file);
+    uploadFile();
+
   }
+
+function uploadFile() {
+    var blobFile = this.file;
+    var formData = new FormData();
+    formData.append("fileToUpload", blobFile);
+
+    $.ajax({
+       url: "/resume",
+       type: "POST",
+       data: formData,
+       processData: false,
+       contentType: false,
+       success: function(response) {
+           // .. do something
+       },
+       error: function(jqXHR, textStatus, errorMessage) {
+           console.log(errorMessage); // Optional
+       }
+    });
+}
+
 
   handleSubmit = async event => {
     event.preventDefault();
 
     if (this.file && this.file.size > config.MAX_ATTACHMENT_SIZE) {
       alert("Please pick a file smaller than 5MB");
+      console.log(event.traget.file[0]);
       return;
     }
 

@@ -1,18 +1,15 @@
-import axios from "axios";
-const pdftotext = require('pdftotextjs');
+const router = require("express").Router();
+const resumeController = require("../../controllers/resumeController");
 
+// Matches with "/api/resume"
+router.route("..")
+  .post(resumeController.create);
 
+// Matches with "/api/manager/:id"
+// router
+//   .route("/:id")
+//   .get(resumeController.findById)
+//   .put(resumeController.update)
+//   .delete(resumeController.remove);
 
-export default {
-  extractText: function(path) {
-  	console.log("in extract function");
-    var pdf = new pdftotext('../../John Doe.pdf');
-
-
-    var data = pdf.getTextSync();
-    console.log(data);
-
-    return;
-
-      }
-};
+module.exports = router;
