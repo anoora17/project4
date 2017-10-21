@@ -81,6 +81,9 @@ constructor(props) {
           <a href="/allcand" className="navbar-brand">
           Search Resumes
           </a>
+          <a href="/jobreq/openreqs/59ea0ce5a8d8643b8821938f" className="navbar-brand">
+          My Positions
+          </a>
           <a href="/resume" className="navbar-brand">
           Upload Resume
           </a>
