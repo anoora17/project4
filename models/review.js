@@ -4,11 +4,9 @@ const Schema = mongoose.Schema;
 const reviewSchema = new Schema({
   rating: { type: Number, required: true },
   comment: { type: String, required: true },
-  manager: {
-    type: Schema.Types.ObjectId,
-    ref: "Manager"
-  }
-  
+  mgrid: { type: String, required: true },
+  candid: { type: String, required: true }
+    
 });
 
 const Review = mongoose.model("Review", reviewSchema);

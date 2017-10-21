@@ -5,6 +5,9 @@ export default {
   getJobReqs: function() {
     return axios.get("/api/jobreq");
   },
+  getJobReqsbyMgr: function(mgrid) {
+    return axios.get("../api/jobreq/openreqs/" + mgrid);
+  },
   // Gets the JobReq with the given id
   getJobReq: function(id) {
     return axios.get("/api/jobreq/" + id);
@@ -15,6 +18,7 @@ export default {
   },
   // Saves a JobReq to the database
   saveJobReq: function(jobreqData) {
+    console.log(jobreqData);
     return axios.post("/api/jobreq", jobreqData);
   }
 };

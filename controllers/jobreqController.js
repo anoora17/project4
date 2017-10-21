@@ -33,5 +33,12 @@ module.exports = {
       .then(dbModel => dbModel.remove())
       .then(dbModel => res.json(dbModel))
       .catch(err => res.status(422).json(err));
-  }
+  },
+  findByMgr: function(req, res) {
+    console.log(req.params.mgrid)
+    db.Jobreq
+      .find({mgrid: req.params.mgrid })
+      .then(dbModel => res.json(dbModel))
+      .catch(err => res.status(422).json(err));
+    }
 };

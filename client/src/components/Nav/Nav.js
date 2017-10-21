@@ -1,10 +1,10 @@
 import React from "react";
 import { Component } from "react";
-import { Link, withRouter, Route} from "react-router-dom";
+import { withRouter, Route} from "react-router-dom";
 import "./nav.css";
 import { authUser, signOutUser } from "../../libs/awsLib.js";
 import Routenav from "../Routenav";
-import { NavItem, Navbar } from "react-bootstrap";
+import { NavItem } from "react-bootstrap";
 
 
 /* This section Added By Noor*/

@@ -13,11 +13,7 @@ const candidateSchema = new Schema({
   resume_url: { type: String, required: true },
   resume_text: { type: String, required: true },
   resume: { type: String, required: false},
-  date: { type: Date, default: Date.now },
-  review: [{
-    type: Schema.Types.ObjectId,
-    ref: "review"
-  }]
+  date: { type: Date, default: Date.now }
 });
 
 const Candidate = mongoose.model("Candidate", candidateSchema);

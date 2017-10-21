@@ -1,12 +1,14 @@
 const router = require("express").Router();
 const jobreqController = require("../../controllers/jobreqController");
 
-// Matches with "/api/books"
+// Matches with "/api/jobreqs"
 router.route("/")
   .get(jobreqController.findAll)
   .post(jobreqController.create);
 
-// Matches with "/api/books/:id"
+router.route("/openreqs/:mgrid")
+	.get(jobreqController.findByMgr);
+
 router
   .route("/:id")
   .get(jobreqController.findById)

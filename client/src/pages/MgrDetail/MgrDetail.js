@@ -1,8 +1,5 @@
 import React, { Component } from "react";
-import DeleteBtn from "../../components/DeleteBtn";
-import DelBtn from "../../components/DelBtn";
 import ReviewBtn from "../../components/ReviewBtn";
-import UploadBtn from "../../components/UploadBtn";
 import Jumbotron from "../../components/Jumbotron";
 import Modal from "react-modal";
 import managerAPI from "../../utils/managerAPI";
@@ -27,7 +24,12 @@ class MgrDetail extends Component {
   constructor(props) {
     super(props)
   this.state = {
-    manager: {},
+    manager: [],
+    jobreq: [],
+    title: "",
+    description: "",
+    salary: "",
+    reqskills: "",
     isOpen: false
 
   }
@@ -35,26 +37,55 @@ class MgrDetail extends Component {
   };
 
   componentDidMount() {
-    
-    
     managerAPI.getManager(this.props.match.params.id)
       .then(res => this.setState({ manager: res.data }))
       .catch(err => console.log(err));
 
-    
-  }
+    this.loadJobReqs(this.props.match.params.id);    
+  
+  };
+
+  loadJobReqs = (id) => {
+    jobreqAPI.getJobReqsbyMgr(id)
+    .then(res =>
+        this.setState({ jobreq: res.data, title: "", description: "", salary: "", reqskills: ""})
+      )
+      .catch(err => console.log(err));
+  };
 
   deleteJobReq = id => {
     jobreqAPI.deletejobReq(id)
-      .then(res => this.loadManagers())
+      .then(res => this.loadJobReqs())
       .catch(err => console.log(err));
   };
   //function to set modal state for candidate review
   toggleModal = () => {
-      console.log(this.state.isOpen);
       this.setState({isOpen: !this.state.isOpen});
-      console.log(this.state.isOpen);
-    };
+      
+  };
+
+  handleInputChange = event => {
+    const { name, value } = event.target;
+    this.setState({
+      [name]: value
+    });
+  };
+
+  handleFormSubmit = event => {
+    event.preventDefault();
+    if (this.state.title && this.state.description && this.state.reqskills) {
+      console.log("before save call");
+      jobreqAPI.saveJobReq({
+        title: this.state.title,
+        description: this.state.description,
+        salary: this.state.salary,
+        reqskills: this.state.reqskills,
+        mgrid: this.state.manager._id
+      })
+        .then(res => this.loadJobReqs(this.state.manager._id))
+        .catch(err => console.log(err));
+    }
+  };
 
   render() {
     return (
@@ -99,12 +130,47 @@ class MgrDetail extends Component {
         <Row>
           <Col size="md-12">
             <h2>Requisitions for Manager</h2>
-            <Col size="md-12">
+            <Col size="md-6">
+              <form>
+              <Input
+                value={this.state.title}
+                onChange={this.handleInputChange}
+                name="title"
+                placeholder="Title (required)"
+              />
+              <TextArea
+                value={this.state.description}
+                onChange={this.handleInputChange}
+                name="description"
+                placeholder="Description (required)"
+              />
+              <Input
+                value={this.state.salary}
+                onChange={this.handleInputChange}
+                name="salary"
+                placeholder="Salary (optional)"
+              />
+              <Input
+                value={this.state.reqskills}
+                onChange={this.handleInputChange}
+                name="reqskills"
+                placeholder="Required Skills/Qualifications (required)"
+              />
+              <FormBtn
+                disabled={!(this.state.title && this.state.description && this.state.reqskills)}
+                onClick={this.handleFormSubmit}
+              >
+                Save Requisition
+              </FormBtn>
+            </form>
+            </Col>
+               
+            <Col size="md-6">
             
-            {this.state.manager.length ? (
+            {this.state.jobreq.length ? (
               <List>
-              console.log({this.state.manager});
-                {this.state.manager.map(jobreq => (
+              
+                {this.state.jobreq.map(jobreq => (
                   <ListItem key={jobreq._id}>
                     <Link to={"/jobreq/" + jobreq._id}>
                       <strong>
@@ -122,7 +188,7 @@ class MgrDetail extends Component {
             )}
           </Col>
             
-          </Col>
+         </Col> 
         </Row>
       </Container>
     );
