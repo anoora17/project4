@@ -34,5 +34,12 @@ module.exports = {
       .then(dbModel => dbModel.remove())
       .then(dbModel => res.json(dbModel))
       .catch(err => res.status(422).json(err));
+  },
+  findByCandidate: function(req, res) {
+    console.log(req.params.candid)
+    db.Review
+      .find({candid: req.params.candid })
+      .then(dbModel => res.json(dbModel))
+      .catch(err => res.status(422).json(err));
   }
 };
