@@ -66,9 +66,8 @@ class Detail extends Component {
   };
   //function to set modal state for candidate review
   toggleModalReviewCand = () => {
-      console.log(this.state.CandisOpen);
       this.setState({CandisOpen: !this.state.CandisOpen});
-      console.log(this.state.CandisOpen);
+      
   };
 
   handleFormSubmit = event => {

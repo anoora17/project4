@@ -24,7 +24,7 @@ class MgrDetail extends Component {
   constructor(props) {
     super(props)
   this.state = {
-    manager: [],
+    manager: {},
     jobreq: [],
     title: "",
     description: "",
@@ -37,6 +37,7 @@ class MgrDetail extends Component {
   };
 
   componentDidMount() {
+    console.log(this.props.match.params.id)
     managerAPI.getManager(this.props.match.params.id)
       .then(res => this.setState({ manager: res.data }))
       .catch(err => console.log(err));
@@ -55,7 +56,7 @@ class MgrDetail extends Component {
 
   deleteJobReq = id => {
     jobreqAPI.deletejobReq(id)
-      .then(res => this.loadJobReqs())
+      .then(res => this.loadJobReqs(this.state.manager._id))
       .catch(err => console.log(err));
   };
   //function to set modal state for candidate review
@@ -82,7 +83,7 @@ class MgrDetail extends Component {
         reqskills: this.state.reqskills,
         mgrid: this.state.manager._id
       })
-        .then(res => this.loadJobReqs(this.state.manager._id))
+        .then(res => this.loadJobReqs(this.state.manager._id), this.toggleModal())
         .catch(err => console.log(err));
     }
   };
@@ -107,65 +108,52 @@ class MgrDetail extends Component {
         </Row>
         <Row>
           <Col size="md-10 md-offset-1">
-            
+            <button onClick={this.toggleModal}>Create Job Profile</button>
           </Col>
         </Row>
-        <Modal isOpen={this.state.isOpen}
-                  onRequestClose={this.toggleModal}
-                  contentLabel="Some modal text here"
-                  style={customStyles}
-                  >
-                  <h2>Open Job Requisitions:</h2>
-                  <h2>{this.state.fullname}</h2>
-                  <button onClick={this.toggleModal}>Close</button>
-                  <div>Enter Job Req Detail Here</div>
-                  <form>
-                    <input />
-                    <button>tab navigation</button>
-                    <button>stays</button>
-                    <button>inside</button>
-                    <button>the modal</button>
-                  </form>
-          </Modal>
+        
         <Row>
           <Col size="md-12">
             <h2>Requisitions for Manager</h2>
-            <Col size="md-6">
-              <form>
-              <Input
-                value={this.state.title}
-                onChange={this.handleInputChange}
-                name="title"
-                placeholder="Title (required)"
-              />
-              <TextArea
-                value={this.state.description}
-                onChange={this.handleInputChange}
-                name="description"
-                placeholder="Description (required)"
-              />
-              <Input
-                value={this.state.salary}
-                onChange={this.handleInputChange}
-                name="salary"
-                placeholder="Salary (optional)"
-              />
-              <Input
-                value={this.state.reqskills}
-                onChange={this.handleInputChange}
-                name="reqskills"
-                placeholder="Required Skills/Qualifications (required)"
-              />
-              <FormBtn
-                disabled={!(this.state.title && this.state.description && this.state.reqskills)}
-                onClick={this.handleFormSubmit}
-              >
-                Save Requisition
-              </FormBtn>
-            </form>
+            <Col size="md-12">
+            <Modal isOpen={this.state.isOpen}
+                  onRequestClose={this.toggleModal}
+                  contentLabel="Input Job Profile"
+                  style={customStyles}
+                  >
+                    <form>
+                    <Input
+                      value={this.state.title}
+                      onChange={this.handleInputChange}
+                      name="title"
+                      placeholder="Title (required)"
+                    />
+                    <TextArea
+                      value={this.state.description}
+                      onChange={this.handleInputChange}
+                      name="description"
+                      placeholder="Description (required)"
+                    />
+                    <Input
+                      value={this.state.salary}
+                      onChange={this.handleInputChange}
+                      name="salary"
+                      placeholder="Salary (optional)"
+                    />
+                    <Input
+                      value={this.state.reqskills}
+                      onChange={this.handleInputChange}
+                      name="reqskills"
+                      placeholder="Required Skills/Qualifications (required)"
+                    />
+                    <button onClick={
+                      this.handleFormSubmit}>Save</button>
+                    <button onClick={this.toggleModal}>Cancel</button>
+                  </form>
+               </Modal>   
             </Col>
                
-            <Col size="md-6">
+            <Col size="md-12">
             
             {this.state.jobreq.length ? (
               <List>
