@@ -6,6 +6,9 @@ router.route("/")
   .get(managerController.findAll)
   .post(managerController.create);
 
+ router.route("/:email")
+ 	.get(managerController.findByEmail);
+
 // Matches with "/api/manager/:id"
 router
   .route("/:id")

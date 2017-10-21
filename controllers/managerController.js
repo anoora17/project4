@@ -15,6 +15,11 @@ module.exports = {
       .then(dbModel => res.json(dbModel))
       .catch(err => res.status(422).json(err));
   },
+  findByEmail: function(req, res) {
+      .find({ email: req.params.email })
+      .then(dbModal => res.json(dbModel))
+      .catch(er => res.status(422).json(err));
+  },
   create: function(req, res) {    
     db.Manager
       .create(req.body)

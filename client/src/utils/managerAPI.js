@@ -9,6 +9,9 @@ export default {
   getManager: function(id) {
     return axios.get("/api/manager/" + id);
   },
+  getManagerbyEmail: function(email) {
+    return axios.get("/api/manager/" + email);
+  },
   // Deletes the manager with the given id
   deleteManager: function(id) {
     return axios.delete("/api/manager/" + id);
