@@ -1,6 +1,7 @@
 import React from "react";
-import { Component } from "react";
-import { withRouter, Route} from "react-router-dom";
+import { Component, Route } from "react";
+import { withRouter} from "react-router-dom";
+import Routes from "../Routenav";
 import "./nav.css";
 import { authUser, signOutUser } from "../../libs/awsLib.js";
 import Routenav from "../Routenav";
@@ -15,24 +16,25 @@ constructor(props) {
 // to load user session to the state
     this.state = {
       isAuthenticated: false,
-        isAuthenticating: true,
-     
+      isAuthenticating: true     
     };
+
     this.userHasAuthenticated = this.userHasAuthenticated.bind(this)
   }
 
   async componentDidMount() {
-    try {
+      try {
        if ( await authUser()) {
-        this.userHasAuthenticated(true);
+        // this.userHasAuthenticated(true);
        }
-    }
-        catch(e) {
+    }        catch(e) {
           alert(e);
     }
 
     this.setState({ isAuthenticating: false });
   }
+
+
 
   userHasAuthenticated = authenticated => {
     this.setState({ isAuthenticated: authenticated });
@@ -40,7 +42,7 @@ constructor(props) {
 
   handleLogout = event => {
     signOutUser()
-    window.location.replace("/login")
+    // window.location.replace("/login")
     this.userHasAuthenticated(false);
     this.props.history.push("/login");
     
@@ -67,58 +69,40 @@ constructor(props) {
               <span className="icon-bar"></span>
               <span className="icon-bar"></span>
             </button>
-            <a href="/" className="navbar-brand">
-            ACME Inc. Resume Database
-          </a>
+            <a href="/" className="navbar-brand ">
+            ACME Inc. </a>            
           
-          <a href="/managers" className="navbar-brand">
-          Managers
-          </a>
-          
-          <a href="/candidates" className="navbar-brand">
-          Candidates
-          </a>
-
-          <a href="/allcand" className="navbar-brand">
-          Search Resumes
-          </a>
-          <a href="/managers/59ea0ce5a8d8643b8821938f" className="navbar-brand">
-          My Positions
-          </a>
-          <a href="/resume" className="navbar-brand">
-          Upload Resume
-          </a>
           </div>
 
     
-        <div className="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+        <div className="collapse navbar-collapse" >
           <ul className="nav navbar-nav">
-            {/* <li className="active"><a href="#">All <span className="sr-only">(current)</span></a></li>
-            <li><a href="#">Saved Items</a></li>
-                         */}
-                     
+             <li className="active" className="nbar"><a href="/managers"> Managers <span className="sr-only">(current)</span></a></li>
+            <li><a href="/candidates" className="nbar">Candidates</a></li>
+            <li><a href="/allcand"className="nbar">Search Resumes</a></li>            
+            <li><a href="/managers/59ea0ce5a8d8643b8821938f" className="nbar">My Positions</a></li>
+            <li><a href="/resume" className="nbar">Upload Resumes</a></li>        
           </ul>
       
           <ul className="nav navbar-nav navbar-right">        
             <li className="dropdown">
 
               {this.state.isAuthenticated
-                ? <NavItem onClick={this.handleLogout}>Logout</NavItem>
-              :[<a key={0} data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Login <span className="caret"></span></a>,
+                ? <NavItem onClick={this.handleLogout } className ="Login">Sign Out</NavItem>
+              :[<a key={0} data-toggle="dropdown" >Login <span className="caret"></span></a>,
               <ul key={1} className="dropdown-menu">                  
                     <Routenav key={2} className ="Login" href="/login">Signin</Routenav>                          
                    <Routenav key={3} className ="Login" href="/signup">Signup</Routenav>
                    
              </ul>
              ]}
-
           </li>
          </ul>
        </div>
 
-     </div>
+      </div>
      <section className="picture"></section>   
-     <Route childProps={childProps} />   
+     <Routes childProps={childProps} />   
    
   </nav>
     );

@@ -18,6 +18,7 @@ export default {
   },
   // Saves a manager to the database
   saveManager: function(managerData) {
+    console.log(managerData)
     return axios.post("/api/manager", managerData);
   }
 };

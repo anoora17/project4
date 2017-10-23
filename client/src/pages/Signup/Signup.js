@@ -26,7 +26,9 @@ export default class Signup extends Component {
       password: "",
       confirmPassword: "",
       confirmationCode: "",
-      newUser: null
+      newUser: null,
+      department:"",
+      managerName:""
     };
   }
 
@@ -78,7 +80,7 @@ export default class Signup extends Component {
         this.state.password
       );
       window.location.replace("/login")
-      this.props.userHasAuthenticated(true);
+     // this.props.userHasAuthenticated(true);
       this.props.history.push("/");
     } catch (e) {
       alert(e);
@@ -93,13 +95,18 @@ export default class Signup extends Component {
     });
 
     return new Promise((resolve, reject) =>
+
       userPool.signUp(email, password, [], null, (err, result) => {
         if (err) {
           reject(err);
           return;
         }
-        
-        resolve(result.user);
+        console.log(this.state)
+        console.log(result);
+        managerAPI.saveManager({ fullname: this.state.managerName,
+                                department: this.state.department,
+                                email: this.state.email}).then(resolve(result.user))
+       
       })
     );
   }
@@ -121,6 +128,7 @@ export default class Signup extends Component {
       Username: email,
       Password: password
     };
+
     const authenticationDetails = new AuthenticationDetails(authenticationData);
 
     return new Promise((resolve, reject) =>
@@ -183,6 +191,22 @@ export default class Signup extends Component {
             value={this.state.confirmPassword}
             onChange={this.handleChange}
             type="password"
+          />
+        </FormGroup>
+        <FormGroup controlId="department" bsSize="large">
+          <ControlLabel>Department</ControlLabel>
+          <FormControl
+            value={this.state.department}
+            onChange={this.handleChange}
+            type="text"
+          />
+        </FormGroup>
+        <FormGroup controlId="managerName" bsSize="large">
+          <ControlLabel>FullName</ControlLabel>
+          <FormControl
+            value={this.state.managerName}
+            onChange={this.handleChange}
+            type="text"
           />
         </FormGroup>
         <LoaderButton
