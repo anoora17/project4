@@ -2,18 +2,19 @@
 body {
   font-family: "Open Sans", sans-serif;
   font-size: 16px;  
-  background: radial-gradient(white, #EEF6F9);
-  color: #3FA564;
+  background: radial-gradient(white, #113f4e);
+  color: green;
             
 }
 
 h1, h2, h3, h4, h5, h6 {
- font-family: "Open Sans", "sans-seri";
+ font-family: "ProximaNova", "Helvetica Neue", "Helvetica", Roboto, Arial, sans-serif;
 }
-.navbar-brand {
-	
+
+.brand {
+	font-family: "ProximaNova", "Helvetica Neue", "Helvetica", Roboto, Arial, sans-serif;
 	color:#fff;
-	font-size: 2em, strong;
+	font-size: 1em, strong;
 }
 
 .Login{
@@ -33,4 +34,16 @@ h1, h2, h3, h4, h5, h6 {
   background-image: url("https://firemeibegyou.com/wp-content/uploads/2016/05/true-professional.jpg");
   height: 200px;
 
+}
+
+navbar-brand div{
+  background-image: url("https://www.clker.com/cliparts/h/p/9/F/i/m/tm-sign-th.png"))
+}
+.nbar{
+    
+    font-family:"ProximaNova" ;
+    background: radial-gradient(lightblue, #EdF6F9);   
+    color:#0000A0;
+    font-size: 1em;   
+    border:3px  #ffffff;
 }

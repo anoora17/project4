@@ -10,6 +10,9 @@ import {
 } from "amazon-cognito-identity-js";
 
 import LoaderButton from "../../components/LoaderButton";
+import managerAPI from "../../utils/managerAPI";
+
+
 
 
 export default class Signin extends Component {
@@ -18,7 +21,8 @@ export default class Signin extends Component {
 
     this.state = {
       email: "",
-      password: ""
+      password: "",
+
     };
   }
 
@@ -33,13 +37,17 @@ export default class Signin extends Component {
 
     return new Promise((resolve, reject) =>
       user.authenticateUser(authenticationDetails, {
-        onSuccess: result => resolve(),
+        onSuccess: result =>resolve(),
         onFailure: err => reject(err)
-      })
+      })    
+   
+
     );
   }
 
-
+  FindLoggedManager = () =>{
+    managerAPI.getManagerbyEmail(this.state.email)
+  }
 
   validateForm() {
     return this.state.email.length > 0 && this.state.password.length > 0;
@@ -53,24 +61,22 @@ export default class Signin extends Component {
 
   handleSubmit = async event => {
     event.preventDefault();
-    this.setState({ isLoading: true });
+       this.setState({ isLoading: true });
 
-    try {
-         this.login(this.state.email, this.state.password).then( err =>{
-          if (err) { alert(err)}
-            else {
-        
-            window.location.replace("/managers")
+    
+         this.login(this.state.email, this.state.password).then( data => {
+
+            console.log(JSON.stringify(data))                  
+                    
+           // window.location.replace("/managers")
           this.props.history.push("/managers");
-          this.props.userHasAuthenticated(true);
+          //this.props.userHasAuthenticated(true);
           this.setState({ isLoading: false });
-          }
-         })
-       
-        } catch (e) {
+          
+         }).catch (e => {
           alert(e);
           this.setState({ isLoading: false });
-      }
+      })
   }
 
   render() {

@@ -10,7 +10,7 @@ export default {
     return axios.get("/api/manager/" + id);
   },
   getManagerbyEmail: function(email) {
-    return axios.get("/api/manager/" + email);
+    return axios.get("/api/manager/email/" + email);
   },
   // Deletes the manager with the given id
   deleteManager: function(id) {
@@ -18,6 +18,7 @@ export default {
   },
   // Saves a manager to the database
   saveManager: function(managerData) {
+    console.log(managerData)
     return axios.post("/api/manager", managerData);
   }
 };

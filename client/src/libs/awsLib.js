@@ -1,6 +1,9 @@
 import { CognitoUserPool } from "amazon-cognito-identity-js";
 import config from "../config";
 import managerAPI from "../utils/managerAPI";
+
+
+
 export async function authUser() {
   const currentUser = getCurrentUser();
 
@@ -10,7 +13,7 @@ export async function authUser() {
 
   await getUserToken(currentUser);
 
-  return true;
+  return currentUser.Username;
 }
 
 export function signOutUser() {
