@@ -9,6 +9,9 @@ export default {
   getReview: function(id) {
     return axios.get("/api/review/" + id);
   },
+  getReviewsbyCandidate: function(candid) {
+    return axios.get("/api/review/candrevs/" + candid);
+  },
   // Deletes the review with the given id
   deleteReview: function(id) {
     return axios.delete("/api/review/" + id);

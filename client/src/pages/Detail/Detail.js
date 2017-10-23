@@ -26,6 +26,10 @@ class Detail extends Component {
     super(props)
   this.state = {
     candidate: {},
+    reviews: [],
+    rating: "",
+    comment: "",
+    reviewername: "",
     CandisOpen: false
 
   }
@@ -36,14 +40,54 @@ class Detail extends Component {
     candidateAPI.getCandidate(this.props.match.params.id)
       .then(res => this.setState({ candidate: res.data }))
       .catch(err => console.log(err));
+
+    this.loadCandReviews(this.props.match.params.id);
   }
 
+  loadCandReviews = (candid) => {
+    reviewAPI.getReviewsbyCandidate(candid)
+    .then(res =>
+        this.setState({ reviews: res.data})
+      )
+      .catch(err => console.log(err));
+  };
+
+  deleteReview = id => {
+    reviewAPI.deleteReview(id)
+      .then(res => this.loadCandReviews(this.state.candidate._id))
+      .catch(err => console.log(err));
+  };
+
+  handleInputChange = event => {
+    const { name, value } = event.target;
+    this.setState({
+      [name]: value
+    });
+  };
   //function to set modal state for candidate review
   toggleModalReviewCand = () => {
-      console.log(this.state.ReviewisOpen);
-      this.setState({ReviewisOpen: !this.state.ReviewisOpen});
-      console.log(this.state.ReviewisOpen);
-    };
+      this.setState({CandisOpen: !this.state.CandisOpen});
+      
+  };
+
+  handleFormSubmit = event => {
+    event.preventDefault();
+    if (this.state.rating && this.state.comment && this.state.reviewername) {
+      reviewAPI.saveReview({
+        rating: this.state.rating,
+        comment: this.state.comment,
+        reviewername: this.state.reviewername,
+        candid: this.state.candidate._id
+      })
+        .then(res =>
+          this.toggleModalReviewCand(),
+         this.loadCandReviews(this.state.candidate._id))
+        .catch(err => console.log(err));
+        
+
+    }
+  };
+
 
   render() {
     return (
@@ -70,6 +114,7 @@ class Detail extends Component {
               <p>
                 {this.state.candidate.resume_text}
               </p>
+              <button onClick={this.toggleModalReviewCand}>Submit Review</button>
               
             </article>
           </Col>
@@ -80,22 +125,57 @@ class Detail extends Component {
                   style={customStyles}
                   >
                   <h2>Review for Candidate:</h2>
-                  <h2>{this.state.firstname} {this.state.lastname}</h2>
-                  <button onClick={this.toggleModalReviewCand}>close</button>
+                  <h2>{this.state.candidate.firstname} {this.state.candidate.lastname}</h2>
+                  
                   <div>Enter Review Here</div>
                   <form>
-                    <input />
-                    <button>tab navigation</button>
-                    <button>stays</button>
-                    <button>inside</button>
-                    <button>the modal</button>
+                    <Input
+                      value={this.state.reviewername}
+                      onChange={this.handleInputChange}
+                      name="reviewername"
+                      placeholder="Your Name (required)"
+                    />
+                    <Input
+                      value={this.state.rating}
+                      onChange={this.handleInputChange}
+                      name="rating"
+                      placeholder="Rating (required)"
+                    />
+                    <TextArea
+                      value={this.state.comment}
+                      onChange={this.handleInputChange}
+                      name="comment"
+                      placeholder="Comment (required)"
+                    />
+                    
+                    <button onClick={
+                      this.toggleModalReviewCand,
+                      this.handleFormSubmit}>Save</button>
+                    <button onClick={this.toggleModalReviewCand}>Cancel</button>
                   </form>
           </Modal>
         <Row>
           <Col size="md-12">
-            <h2>Reviews for Candidate</h2>
-            <h3>No Reviews on File</h3>
+            <h2>Reviews for Candidate</h2>            
             
+            {this.state.reviews.length ? (
+              <List>              
+                {this.state.reviews.map(reviews => (
+                  <ListItem key={reviews._id}>
+                    <Link to={"/review/" + reviews._id}>
+                      <strong>
+                        Rated: {reviews.rating} by: {reviews.mgrname} Comments: {reviews.comment}
+                      </strong>
+                    </Link>
+                    
+                    <DeleteBtn onClick={() => this.deleteReview(reviews._id)} />
+                  </ListItem>
+                ))}
+              </List>
+
+            ) : (
+              <h3>No Requisition on file</h3>
+            )}
           </Col>
         </Row>
       </Container>
