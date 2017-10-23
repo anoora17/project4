@@ -10,7 +10,7 @@ router.route("/txtSearch/:text")
 
 	.get(candidateController.find);
 
-router.route("/txtSearch/:restext")
+router.route("/txtSearch/updtext/:restext")
 
 	.put(candidateController.update);
 // Matches with "/api/candidate/:id"
