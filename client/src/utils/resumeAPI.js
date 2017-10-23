@@ -16,4 +16,3 @@ export default {
 
       }
 };
- //add the code above to the file we create in Client -> Utils  called ResumeAPI.js

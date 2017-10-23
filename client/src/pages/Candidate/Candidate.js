@@ -11,6 +11,7 @@ import { Link } from "react-router-dom";
 import { Col, Row, Container } from "../../components/Grid";
 import { List, ListItem } from "../../components/List";
 import { Input, TextArea, FormBtn } from "../../components/Form";
+import $ from "jquery";
 
 const customStyles = {
   content : {
@@ -41,10 +42,10 @@ class Candidates extends Component {
     resume_text: "",
     resume: "",
     SaveisOpen: false
-    
+
     };
     this.toggleModal = this.toggleModal.bind(this);
-    
+
   }
 
   componentDidMount() {
@@ -66,7 +67,7 @@ class Candidates extends Component {
   };
 
   uploadResume = id => {
-    
+
     //This is where the new function needs to go
     //new function
     candidateAPI.uploadeCandResume(id, "")
@@ -76,7 +77,7 @@ class Candidates extends Component {
 
   reviewCandidate = id => {
     //open modal form here
-   
+
 
     reviewAPI.saveReview(id)
       .then(res => this.loadCandidates())
@@ -119,7 +120,7 @@ class Candidates extends Component {
           this.toggleModal(),
          this.loadCandidates())
         .catch(err => console.log(err));
-        
+
 
     }
   };
@@ -228,11 +229,11 @@ class Candidates extends Component {
               >
                 Submit Candidate
             </FormBtn>
-            
+
             </Col>
           </Row>
           </form>
-          
+
           <Modal isOpen={this.state.SaveisOpen}
                   onRequestClose={this.toggleModal}
                   contentLabel="Save Successful"
@@ -240,10 +241,10 @@ class Candidates extends Component {
                   >
                   <h2>Saved Candidate Data</h2>
                   <button className="btn btn-success" onClick={this.toggleModal}>close</button>
-                  
+
           </Modal>
-          
-          
+
+
           <Col size="md-12">
             <Jumbotron>
               <h2>Candidates in Database</h2>
@@ -257,7 +258,7 @@ class Candidates extends Component {
                         {candidate.position_type}: {candidate.firstname} {candidate.lastname}
                       </strong>
                     </Link>
-                    
+
                     <DeleteBtn onClick={() => this.deleteCandidate(candidate._id)} />
                     <UploadBtn onClick={() => this.uploadResume(candidate._id)} />
                   </ListItem>
@@ -267,10 +268,35 @@ class Candidates extends Component {
               <h3>No Candidates Available</h3>
             )}
           </Col>
-        
+
       </Container>
     );
   }
 }
+
+$(document).ready(function() {
+  $('.LoaderButton').click(function() {
+    var resumeText = $('input[class="resume-upload"]').prop('files')[0];
+    console.log(resumeText);
+
+    $.ajax({
+        type: "PUT",
+        resume_text: resumeText,
+        url: "/candidates/:id",
+        contentType: false,
+        processData: false,
+        success: function(response) {
+            if(response) {
+                $("#ajaxmessage").html("Your submission was successful!  Thank you for updating your public profile settings.");
+                console.log(response);
+            } else {
+                $("#ajaxmessage").html("There was an error with your submission.");
+            }
+        }
+    });
+  });
+
+
+});
 
 export default Candidates;
