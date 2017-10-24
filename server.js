@@ -21,7 +21,7 @@ mongoose.Promise = global.Promise;
 // Connect to the Mongo DB
 mongoose.connect(
 
-  process.env.MONGODB_URI || "mongodb://localhost/ResumeDB",
+  process.env.MONGODB_URI || "mongodb://heroku_14fpttmx:b8dh82gv766ol1g93indedu7ma@ds229835.mlab.com:29835/heroku_14fpttmx",
   {
     useMongoClient: true
   }
