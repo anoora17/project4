@@ -72,7 +72,7 @@ class Candidates extends Component {
     
     //This is where the new function needs to go
     //new function
-    candidateAPI.uploadeCandResume(id, "")
+    candidateAPI.getuploadeCandResume(id, "")
       .then(res => this.loadCandidates())
       .catch(err => console.log(err));
   };

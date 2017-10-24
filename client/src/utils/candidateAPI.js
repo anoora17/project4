@@ -25,5 +25,9 @@ export default {
   uploadeCandResume: function(id, resText) {
     console.log("in the upload resume function");
     return axios.post("/api/candidate/resupload"+ resText);
+  },
+  getuploadeCandResume: function(id, resText) {
+    console.log("after the upload resume function");
+    return axios.get("/api/candidate/url"+ resText);
   }
 };
