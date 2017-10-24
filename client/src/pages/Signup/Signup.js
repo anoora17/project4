@@ -79,8 +79,8 @@ export default class Signup extends Component {
         this.state.email,
         this.state.password
       );
-      window.location.replace("/login")
-     // this.props.userHasAuthenticated(true);
+        //window.location.replace("/login")
+      this.props.HandelClick(true);
       this.props.history.push("/");
     } catch (e) {
       alert(e);
@@ -150,7 +150,7 @@ export default class Signup extends Component {
             value={this.state.confirmationCode}
             onChange={this.handleChange}
           />
-          <HelpBlock>Please check your email for the code.</HelpBlock>
+        <HelpBlock>Please check your email for the code.</HelpBlock>
         </FormGroup>
         <LoaderButton
           block

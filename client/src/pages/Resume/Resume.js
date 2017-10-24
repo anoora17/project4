@@ -3,7 +3,7 @@ import { FormGroup, FormControl, ControlLabel } from "react-bootstrap";
 import LoaderButton from "../../components/LoaderButton";
 import config from "../../config";
 import "./Resume.css"
-
+import { invokeApig, s3Upload } from "../../libs/awsLib";
 
 export default class Resume extends Component {
   constructor(props) {
@@ -33,7 +33,13 @@ export default class Resume extends Component {
 
   }
   
-
+createResume(Resume) {
+    return invokeApig({
+      path: "/resume",
+      method: "POST",
+      body: Resume
+    });
+  }
 
   handleSubmit = async event => {
     event.preventDefault();
@@ -44,6 +50,21 @@ export default class Resume extends Component {
     }
 
     this.setState({ isLoading: true });
+    try {
+      const uploadedFilename = this.file
+        ? (await s3Upload(this.file)).Location
+        : null;
+
+      await this.createResume({
+        content: this.state.content,
+        attachment: uploadedFilename
+      });
+
+      this.props.history.push("/candidates");
+    } catch (e) {
+      //alert(e);
+      this.setState({ isLoading: false });
+    }
   }
 
   render() {
@@ -75,3 +96,9 @@ export default class Resume extends Component {
     );
   }
 }
+
+//https://reactjs.org/docs/forms.html
+// 1. Authenticate against our User Pool and acquire a user token.
+// 2. With the user token get temporary IAM credentials from our Identity Pool.
+// 3. Use the IAM credentials to sign our API request with Signature Version 4
+// (http://docs.aws.amazon.com/general/latest/gr/signature-version-4.html).

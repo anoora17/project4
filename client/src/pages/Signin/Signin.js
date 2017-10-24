@@ -34,7 +34,9 @@ export default class Signin extends Component {
     const user = new CognitoUser({ Username: email, Pool: userPool });
     const authenticationData = { Username: email, Password: password };
     const authenticationDetails = new AuthenticationDetails(authenticationData);
-
+      console.log(user)
+      managerAPI.getManagerbyEmail({email:user}).then(
+        console.log(user))
     return new Promise((resolve, reject) =>
       user.authenticateUser(authenticationDetails, {
         onSuccess: result =>resolve(),
@@ -45,9 +47,7 @@ export default class Signin extends Component {
     );
   }
 
-  FindLoggedManager = () =>{
-    managerAPI.getManagerbyEmail(this.state.email)
-  }
+  
 
   validateForm() {
     return this.state.email.length > 0 && this.state.password.length > 0;
@@ -70,7 +70,7 @@ export default class Signin extends Component {
                     
            // window.location.replace("/managers")
           this.props.history.push("/managers");
-          //this.props.userHasAuthenticated(true);
+          this.props.HandelClick(true);
           this.setState({ isLoading: false });
           
          }).catch (e => {
