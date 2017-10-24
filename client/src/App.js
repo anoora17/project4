@@ -41,7 +41,7 @@ render () {
       <Switch>
 
        <Route exact path="/login" render={props => <Signin HandelClick={this.HandelClick} {...props} />} />
-        <Route exact path="/signup" component = {Signup} />        
+        <Route exact path="/signup" render={props => <Signup HandelClick={this.HandelClick} {...props} />} />        
        <Route exact path="/" component={Home} />
         <Route exact path="/resume" component={Resume} />
         <Route exact path="/managers" component={Manager} />
