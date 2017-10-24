@@ -1,4 +1,4 @@
-import React from "react";
+import React, {Component} from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import Resume from "./pages/Resume";
 import Home from "./pages/Home";
@@ -12,17 +12,35 @@ import Nav from "./components/Nav";
 import Signin from "./pages/Signin";
 import Signup from "./pages/Signup";
 
+export default class App extends Component {
+constructor(props) {
+    super(props);
+// to load user session to the state
+    this.state = {
+        isAuthenticated: false,
+        isAuthenticating: true
+       
+    };
+    this.HandelClick = this.HandelClick.bind(this)
+  }
+ HandelClick (isAuthenticated) {
+  this.setState({isAuthenticated})
+
+  
+ } 
 
 
 
 
-const App = () =>
+
+render () {
+ return(
   <Router>
     <div>
-      <Nav  /> 
+      <Nav isAuthenticated = {this.state.isAuthenticated} HandelClick={this.HandelClick}  /> 
       <Switch>
 
-       <Route exact path="/login" component={Signin} />
+       <Route exact path="/login" render={props => <Signin HandelClick={this.HandelClick} {...props} />} />
         <Route exact path="/signup" component = {Signup} />        
        <Route exact path="/" component={Home} />
         <Route exact path="/resume" component={Resume} />
@@ -36,6 +54,7 @@ const App = () =>
         <Route component={NoMatch} />
       </Switch>
     </div>
-  </Router>;
+  </Router>
+   )}
+ }
 
-export default App;

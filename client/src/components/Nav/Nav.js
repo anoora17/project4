@@ -1,49 +1,38 @@
 import React from "react";
-import { Component, Route } from "react";
-import { withRouter} from "react-router-dom";
+import { Component } from "react";
+import { withRouter, Route, Link} from "react-router-dom";
 import Routes from "../Routenav";
 import "./nav.css";
 import { authUser, signOutUser } from "../../libs/awsLib.js";
-import Routenav from "../Routenav";
+
 import { NavItem } from "react-bootstrap";
 
 
 /* This section Added By Noor*/
 class Nav extends Component { 
-  // Added this constructor to update the status of the props
-constructor(props) {
-    super(props);
-// to load user session to the state
-    this.state = {
-      isAuthenticated: false,
-      isAuthenticating: true     
-    };
 
-    this.userHasAuthenticated = this.userHasAuthenticated.bind(this)
-  }
 
-  async componentDidMount() {
-      try {
-       if ( await authUser()) {
-        // this.userHasAuthenticated(true);
-       }
-    }        catch(e) {
-          alert(e);
+    async componentDidMount() {
+      console.log("componenst did Mounted")
+    try {
+      if (await authUser()) {
+
+        this.props.HandelClick(true);
+      }
     }
-
-    this.setState({ isAuthenticating: false });
+    catch(e) {
+      alert(e);
+    }
+    console.log(" Auth Something else")
+    this.setState({ isAuthenticating: false,  isAuthenticated: true });
   }
 
-
-
-  userHasAuthenticated = authenticated => {
-    this.setState({ isAuthenticated: authenticated });
-  }
+  
 
   handleLogout = event => {
     signOutUser()
-    // window.location.replace("/login")
-    this.userHasAuthenticated(false);
+    
+    this.props.HandelClick(false);
     this.props.history.push("/login");
     
    
@@ -51,15 +40,11 @@ constructor(props) {
   }
 
   render() {
-    //pass the session state to the routes
-    const childProps = {
-      isAuthenticated: this.state.isAuthenticated,
-      userHasAuthenticated: this.userHasAuthenticated
-        };
+    
 
 
   return (
-        !this.state.isAuthenticating &&
+        !this.props.isAuthenticating &&
         <nav className="navbar navbar-default navbar-top">  
         <div className="container-fluid">   
           <div className="navbar-header">
@@ -69,31 +54,34 @@ constructor(props) {
               <span className="icon-bar"></span>
               <span className="icon-bar"></span>
             </button>
-            <a href="/" className="navbar-brand ">
-            ACME Inc. </a>            
+            <Link to="/" className="navbar-brand ">
+            ACME Inc. </Link>            
           
           </div>
 
     
         <div className="collapse navbar-collapse" >
           <ul className="nav navbar-nav">
-             <li className="active" className="nbar"><a href="/managers"> Managers <span className="sr-only">(current)</span></a></li>
-            <li><a href="/candidates" className="nbar">Candidates</a></li>
-            <li><a href="/allcand"className="nbar">Search Resumes</a></li>            
-            <li><a href="/managers/59ea0ce5a8d8643b8821938f" className="nbar">My Positions</a></li>
-            <li><a href="/resume" className="nbar">Upload Resumes</a></li>        
-          </ul>
-      
+          { this.props.isAuthenticated
+             ?[ <li className="active" className="nbar"><Link to="/managers"> Managers <span className="sr-only">(current)</span></Link></li>,
+              <li><Link to="/candidates" className="nbar">Candidates</Link></li> ,                         
+              <li><Link to="/managers/:id" className="nbar">My Positions</Link></li>,
+              <li><Link to="/resume" className="nbar">Upload Resumes</Link></li>]
+                           
+              :<li><Link to="/allcand"className="nbar">Search Resumes</Link></li> 
+             }        
+            </ul>
+             
           <ul className="nav navbar-nav navbar-right">        
             <li className="dropdown">
 
-              {this.state.isAuthenticated
+              {this.props.isAuthenticated 
                 ? <NavItem onClick={this.handleLogout } className ="Login">Sign Out</NavItem>
               :[<a key={0} data-toggle="dropdown" >Login <span className="caret"></span></a>,
               <ul key={1} className="dropdown-menu">                  
-                    <Routenav key={2} className ="Login" href="/login">Signin</Routenav>                          
-                   <Routenav key={3} className ="Login" href="/signup">Signup</Routenav>
-                   
+                    <NavItem><Link key={2} className ="Login" to="/login">Signin</Link></NavItem>                          
+                    <NavItem><Link key={3} className ="Login" to="/signup">Signup</Link></NavItem>
+                    
              </ul>
              ]}
           </li>
@@ -102,8 +90,7 @@ constructor(props) {
 
       </div>
      <section className="picture"></section>   
-     <Routes childProps={childProps} />   
-   
+     
   </nav>
     );
    }

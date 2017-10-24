@@ -1,7 +1,7 @@
 @media all and (min-width: 480px) {
   .signin {
     padding: 60px 0;
-     background: radial-gradient( #98AFC7,#E8E8E6);
+     background: radial-gradient( lightblue,#E8E8E6);
   }
 
   .signin form {

@@ -2,7 +2,7 @@
 body {
   font-family: "Open Sans", sans-serif;
   font-size: 16px;  
-  background: radial-gradient(white, #113f4e);
+  background: radial-gradient(white, #EdF6F9);
   color: green;
             
 }
@@ -18,7 +18,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .Login{
-    padding: 5px;
+    padding: 2px 10px;
     background: radial-gradient(lightblue, #EdF6F9);
     border-radius:15px  5% / 20px;
     white-space: nowrap;

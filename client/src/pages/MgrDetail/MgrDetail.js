@@ -8,6 +8,8 @@ import { Link } from "react-router-dom";
 import { Col, Row, Container } from "../../components/Grid";
 import { List, ListItem } from "../../components/List";
 import { Input, TextArea, FormBtn } from "../../components/Form";
+import "./MgrDetail.css";
+
 const customStyles = {
   content : {
     top                   : '50%',
@@ -18,6 +20,7 @@ const customStyles = {
     transform             : 'translate(-50%, -50%)'
   }
 };
+
 
 
 class MgrDetail extends Component {
@@ -93,7 +96,7 @@ class MgrDetail extends Component {
       <Container fluid>
         <Row>
           <Col size="md-12">
-            <Jumbotron>
+             <div>
               <h2>
                 Manager: {this.state.manager.fullname}
               </h2>
@@ -103,7 +106,7 @@ class MgrDetail extends Component {
               <h2> 
                 Department: {this.state.manager.department}
               </h2>
-            </Jumbotron>
+              </div>
           </Col>
         </Row>
         <Row>
