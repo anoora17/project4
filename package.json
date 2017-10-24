@@ -22,6 +22,7 @@
     "aws-sdk": "^2.133.0",
     "axios": "^0.16.2",
     "body-parser": "^1.17.2",
+    "cors": "^2.8.4",
     "crypto-js": "^3.1.9-1",
     "express": "^4.15.4",
     "mongoose": "^4.11.7",
@@ -33,7 +34,9 @@
     "react-modal": "^3.0.3",
     "react-router-dom": "^4.1.2",
     "react-scripts": "^1.0.14",
+    "react-table": "^6.6.0",
     "react-upload-file": "^2.0.0-beta.6",
+    "reactstrap": "^4.8.0",
     "textract": "^2.2.0"
   }
 }

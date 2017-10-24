@@ -11,6 +11,9 @@ import { Link } from "react-router-dom";
 import { Col, Row, Container } from "../../components/Grid";
 import { List, ListItem } from "../../components/List";
 import { Input, TextArea, FormBtn } from "../../components/Form";
+import ReactTable from "react-table";
+import "react-table/react-table.css";
+
 
 const customStyles = {
   content : {
@@ -128,11 +131,71 @@ class Candidates extends Component {
   render() {
     return (
       <Container fluid>
-        <Row>
+      <Row>
+        <div className="divTable">  
           <Col size="md-12">
-            <Jumbotron>
-              <h2>Enter New Candidate</h2>
-            </Jumbotron>
+            <h2>Candidates in Database</h2>
+            
+            <ReactTable
+          data={this.state.candidates}
+          noDataText="No Matches"
+          columns={[
+            {
+              Header: "Name",
+              columns: [
+                {
+                  Header: "First Name",
+                  accessor: "firstname"
+                },
+                {
+                  Header: "Last Name",
+                  id: "lastname",
+                  accessor: d => d.lastname
+                }
+              ]
+            },
+            {
+              Header: "Info",
+              columns: [
+                {
+                  Header: "Position Type",
+                  accessor: "position_type"
+                },
+                {
+                  Header: "Email",
+                  accessor: "email"
+                },
+                {
+                  Header: "Resume",
+                  accessor: "resume_url"
+
+                }
+              ]
+            }
+          ]}
+          defaultPageSize={10}
+          className="-striped -highlight"
+        />
+  
+                           
+        </Col>
+        </div>
+        </Row>
+
+         <Modal isOpen={this.state.SaveisOpen}
+                  onRequestClose={this.toggleModal}
+                  contentLabel="Save Successful"
+                  style={customStyles}
+                  >
+                  <h2>Saved Candidate Data</h2>
+                  <button className="btn btn-success" onClick={this.toggleModal}>close</button>
+                  
+          </Modal>
+
+          <Row>
+          <Col size="md-12">
+            <h2>Enter New Candidate</h2>
+          
           </Col>
         </Row>
         <form>
@@ -233,41 +296,6 @@ class Candidates extends Component {
           </Row>
           </form>
           
-          <Modal isOpen={this.state.SaveisOpen}
-                  onRequestClose={this.toggleModal}
-                  contentLabel="Save Successful"
-                  style={customStyles}
-                  >
-                  <h2>Saved Candidate Data</h2>
-                  <button className="btn btn-success" onClick={this.toggleModal}>close</button>
-                  
-          </Modal>
-          
-          
-          <Col size="md-12">
-            <Jumbotron>
-              <h2>Candidates in Database</h2>
-            </Jumbotron>
-            {this.state.candidates.length ? (
-              <List>
-                {this.state.candidates.map(candidate => (
-                  <ListItem key={candidate._id}>
-                    <Link to={"/candidates/" + candidate._id}>
-                      <strong>
-                        {candidate.position_type}: {candidate.firstname} {candidate.lastname}
-                      </strong>
-                    </Link>
-                    
-                    <DeleteBtn onClick={() => this.deleteCandidate(candidate._id)} />
-                    <UploadBtn onClick={() => this.uploadResume(candidate._id)} />
-                  </ListItem>
-                ))}
-              </List>
-            ) : (
-              <h3>No Candidates Available</h3>
-            )}
-          </Col>
-        
       </Container>
     );
   }

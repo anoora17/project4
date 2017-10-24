@@ -10,7 +10,8 @@ import { Link } from "react-router-dom";
 import { Col, Row, Container } from "../../components/Grid";
 import { List, ListItem } from "../../components/List";
 import { Input, TextArea, FormBtn } from "../../components/Form";
-
+import ReactTable from "react-table";
+import "react-table/react-table.css";
 
 
 
@@ -57,9 +58,9 @@ class AllCandidates extends Component {
       <Container fluid>
         <Row>
           <Col size="md-12">
-            <Jumbotron>
+            
               <h2>Search the Candidate Repo</h2>
-            </Jumbotron>
+           
             <form>
               
               <Input
@@ -79,33 +80,51 @@ class AllCandidates extends Component {
             </form>
           </Col>
           </Row>
-          <Row>
-          <Col size="md-12">
-            //need a label or header here
-            {this.state.candidates.length ? (
-              <List>
-                {this.state.candidates.map(candidate => (
-                  <ListItem key={candidate._id}>
-                    <Link to={"/candidates/" + candidate._id}>
-                      <strong>
-                        {candidate.position_type}: {candidate.firstname} {candidate.lastname}
-                      </strong>
-                    </Link>
-                    
-                    <ReviewBtn onClick={() => this.reviewCandidate(candidate._id)} />
-                  </ListItem>
-                ))}
-              </List>
-
-            ) : (
-              <h3>No Candidates Available</h3>
-            )}
-          </Col>
-        </Row>
+          
         <Row>
           <Col size="md-12">
-              
-                      
+          <div className="divTable">
+          <ReactTable
+          data={this.state.candidates}
+          noDataText="No Matches"
+          columns={[
+            {
+              Header: "Name",
+              columns: [
+                {
+                  Header: "First Name",
+                  accessor: "firstname"
+                },
+                {
+                  Header: "Last Name",
+                  id: "lastname",
+                  accessor: d => d.lastname
+                }
+              ]
+            },
+            {
+              Header: "Info",
+              columns: [
+                {
+                  Header: "Position Type",
+                  accessor: "position_type"
+                },
+                {
+                  Header: "Email",
+                  accessor: "email"
+                },
+                {
+                  Header: "Resume",
+                  accessor: "resume_url"
+                }
+              ]
+            }
+          ]}
+          defaultPageSize={10}
+          className="-striped -highlight"
+        />
+  
+         </div>             
           </Col>
         </Row>
       </Container>

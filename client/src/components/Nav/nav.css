@@ -2,9 +2,14 @@
 body {
   font-family: "Open Sans", sans-serif;
   font-size: 16px;  
-  background: radial-gradient(white, #113f4e);
-  color: green;
+  /* background: radial-gradient(white, #113f4e); */
+ 
             
+}
+
+.divTable{
+  font-family: "ProximaNova", "Helvetica Neue", "Helvetica", Roboto, Arial, sans-serif;
+  background-color: white;
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -37,11 +42,11 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 navbar-brand div{
-  background-image: url("https://www.clker.com/cliparts/h/p/9/F/i/m/tm-sign-th.png"))
+  background-image: url("https://www.clker.com/cliparts/h/p/9/F/i/m/tm-sign-th.png"));
 }
 .nbar{
     
-    font-family:"ProximaNova" ;
+    font-family: "Roboto", "Helvetica Neue", "Helvetica", Arial, sans-serif;
     background: radial-gradient(lightblue, #EdF6F9);   
     color:#0000A0;
     font-size: 1em;   

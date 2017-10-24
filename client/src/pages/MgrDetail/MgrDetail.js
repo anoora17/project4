@@ -94,15 +94,15 @@ class MgrDetail extends Component {
         <Row>
           <Col size="md-12">
             <Jumbotron>
-              <h2>
+              <h3>
                 Manager: {this.state.manager.fullname}
-              </h2>
-              <h2> 
+              </h3>
+              <h3> 
                 Email: {this.state.manager.email} 
-              </h2>
-              <h2> 
+              </h3>
+              <h3> 
                 Department: {this.state.manager.department}
-              </h2>
+              </h3>
             </Jumbotron>
           </Col>
         </Row>
