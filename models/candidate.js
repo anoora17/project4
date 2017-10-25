@@ -10,9 +10,9 @@ const candidateSchema = new Schema({
   state: { type: String, required: false },
   zipcode: { type: String, required: false },
   position_type: { type: String, required: true },
-  resume_url: { type: String, required: true },
-  resume_text: { type: String, required: true },
-  resume: { type: String, required: false},
+  resume_url: { type: String },
+  resume_text: { type: String },
+  resume: { type: String},
   date: { type: Date, default: Date.now }
 });
 

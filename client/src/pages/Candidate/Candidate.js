@@ -51,9 +51,11 @@ class Candidates extends Component {
   }
 
   componentDidMount() {
+     console.log(this.props.location.state.resume_url)
     this.loadCandidates();
-  }
 
+  }
+  
   loadCandidates = () => {
     candidateAPI.getCandidates()
       .then(res =>
@@ -114,9 +116,9 @@ class Candidates extends Component {
         state: this.state.state,
         zipcode: this.state.zipcode,
         position_type: this.state.position_type,
-        resume_url: this.state.resume_url,
+        resume_url: this.props.location.state.resume_url,
         resume_text: this.state.resume_text,
-        resume: this.state.resume_url
+        resume: this.props.location.state.resume_url
       })
         .then(res =>
           this.toggleModal(),

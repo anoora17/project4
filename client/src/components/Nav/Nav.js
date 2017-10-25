@@ -4,7 +4,7 @@ import { withRouter, Route, Link} from "react-router-dom";
 import Routes from "../Routenav";
 import "./nav.css";
 import { authUser, signOutUser } from "../../libs/awsLib.js";
-
+import {Icon} from 'react-fa';
 import { NavItem, Navbar } from "react-bootstrap";
 
 
@@ -77,7 +77,7 @@ class Nav extends Component {
             <li className="dropdown" >
 
               {this.props.isAuthenticated 
-                ? <NavItem onClick={this.handleLogout } className ="Login">Sign Out</NavItem>
+                ? <NavItem onClick={this.handleLogout}><Icon name="cog" spin />Sign Out</NavItem>
               :[<a key={0} data-toggle="dropdown" >Login <span className="caret"></span></a>,
               <ul key={1} className="dropdown-menu">                  
                     <NavItem><Link key={2}  to="/login">Signin</Link></NavItem>                          

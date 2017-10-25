@@ -5,7 +5,7 @@
   }
   
   .Resume form textarea {
-    height: 400px;
+    height: 200px;
     width: 50%;
     font-size: 24px;
   }
@@ -13,8 +13,13 @@
 
 }
 .Resumebtn {
-
-    padding-right: 40%;
-    padding-left: 40%;
+	padding: 5px 10px;  
+    border-radius:15px  5% / 20px;
+    white-space: nowrap;
+    font-size: 14px;  
+    border:2px solid #ffffff;    
+    margin-right: 7px;
+    top: 2px;
+    float:left;
 
 }

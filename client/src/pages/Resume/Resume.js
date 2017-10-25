@@ -1,10 +1,11 @@
 import React, { Component } from "react";
-import { FormGroup, FormControl, ControlLabel } from "react-bootstrap";
+import { FormGroup, FormControl, ControlLabel,ListGroup  } from "react-bootstrap";
 import LoaderButton from "../../components/LoaderButton";
 import config from "../../config";
 import "./Resume.css"
 import { invokeApig, s3Upload } from "../../libs/awsLib";
-
+import candidateAPI from "../../utils/candidateAPI";
+import {Link, Redirect} from "react-router-dom"
 export default class Resume extends Component {
   constructor(props) {
     super(props);
@@ -13,7 +14,9 @@ export default class Resume extends Component {
 
     this.state = {
       isLoading: null,
-      content: ""
+      content: "",
+      resume_url:"",
+       resumes:[]
     };
   }
 
@@ -33,21 +36,24 @@ export default class Resume extends Component {
 
   }
   
-createResume(Resume) {
-    return invokeApig({
-      path: "/resume",
+async createResume(resume) {
+  const {resume_url} = await invokeApig({
+      path: "/resumes",
       method: "POST",
-      body: Resume
+      body: resume
     });
+    console.log(resume_url)
+    candidateAPI.uploadeCandResume(resume_url)
+    this.setState({resume_url:resume_url})
   }
 
   handleSubmit = async event => {
     event.preventDefault();
 
-    if (this.file && this.file.size > config.MAX_ATTACHMENT_SIZE) {
-      alert("Please pick a file smaller than 5MB");
-      return;
-    }
+    // if (this.file && this.file.size > config.MAX_ATTACHMENT_SIZE) {
+    //   alert("Please pick a file smaller than 5MB");
+    //   return;
+    // }
 
     this.setState({ isLoading: true });
     try {
@@ -60,15 +66,48 @@ createResume(Resume) {
         attachment: uploadedFilename
       });
 
-      this.props.history.push("/candidates");
+     // this.props.history.push("/candidate");
     } catch (e) {
       //alert(e);
+
+   //   this.props.history.push("/");
       this.setState({ isLoading: false });
+
     }
   }
 
+ async componentDidMount() {
+    if (!this.props.isAuthenticated) {
+      return;
+    }
+
+    try {
+      const results = await this.resumes();
+      console.log("result" + results)
+      this.setState({ resumes: results });
+    } catch (e) {
+      //alert(e);
+    }
+
+    this.setState({ isLoading: false });
+  }
+
+
+  resumes() {
+    return invokeApig({ path: "/resume" }).then(result =>{
+      console.log(JSON.stringify(result))
+    });
+
+  }
+  
   render() {
-    return (
+     if (this.state.resume_url)
+     {return <Redirect to={{
+               pathname: '/candidates',          
+               state: { resume_url: this.state.resume_url}
+            }}/>
+     }
+    else return (
       <div className="Resume">
         <form onSubmit={this.handleSubmit}>
           <FormGroup controlId="content">
@@ -82,22 +121,31 @@ createResume(Resume) {
             <ControlLabel>Attachment</ControlLabel>
             <FormControl onChange={this.handleFileChange} type="file" />
           </FormGroup>
-          <LoaderButton className="btn btn-sucess"
-            bsStyle ="sucess"       
+          <LoaderButton className="Resumebtn"
+            bsStyle ="info"       
             bsSize="small"
             disabled={!this.validateForm()}
             type="submit"
             isLoading={this.state.isLoading}
             text="Create"
             loadingText="Creating…"
-          />
+          />          
+           <ListGroup>
+          {!this.state.isLoading && this.state.resume_url}
+        </ListGroup>
         </form>
+
+        <a href={this.state.resume_url}> Documents
+        
+        </a>
       </div>
     );
   }
 }
+ 
 
-//https://reactjs.org/docs/forms.html
+
+//reactjs.org/docs/forms.html
 // 1. Authenticate against our User Pool and acquire a user token.
 // 2. With the user token get temporary IAM credentials from our Identity Pool.
 // 3. Use the IAM credentials to sign our API request with Signature Version 4
