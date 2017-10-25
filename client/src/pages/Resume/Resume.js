@@ -6,6 +6,7 @@ import "./Resume.css"
 import { invokeApig, s3Upload } from "../../libs/awsLib";
 import candidateAPI from "../../utils/candidateAPI";
 import {Link, Redirect} from "react-router-dom"
+
 export default class Resume extends Component {
   constructor(props) {
     super(props);
@@ -101,13 +102,14 @@ async createResume(resume) {
   }
   
   render() {
-     if (this.state.resume_url)
-     {return <Redirect to={{
-               pathname: '/candidates',          
-               state: { resume_url: this.state.resume_url}
-            }}/>
-     }
-    else return (
+    //  if (this.state.resume_url)
+    //  {return <Redirect to={{
+    //            pathname: '/candidates',          
+    //            state: { resume_url: this.state.resume_url}
+    //         }}/>
+    //  }
+    // else
+     return (
       <div className="Resume">
         <form onSubmit={this.handleSubmit}>
           <FormGroup controlId="content">
@@ -122,8 +124,7 @@ async createResume(resume) {
             <FormControl onChange={this.handleFileChange} type="file" />
           </FormGroup>
           <LoaderButton className="Resumebtn"
-            bsStyle ="info"       
-            bsSize="small"
+            bsStyle ="info"    
             disabled={!this.validateForm()}
             type="submit"
             isLoading={this.state.isLoading}
@@ -135,7 +136,7 @@ async createResume(resume) {
         </ListGroup>
         </form>
 
-        <a href={this.state.resume_url}> Documents
+        <a href={this.state.resume_url}> Uploaded Document
         
         </a>
       </div>
