@@ -1,7 +1,6 @@
 import React from "react";
 import { Component } from "react";
 import { withRouter, Route, Link} from "react-router-dom";
-import Routes from "../Routenav";
 import "./nav.css";
 import { authUser, signOutUser } from "../../libs/awsLib.js";
 import {Icon} from 'react-fa';

@@ -21,8 +21,8 @@ export default class Signin extends Component {
 
     this.state = {
       email: "",
-      password: "",
-
+      password: ""
+      
     };
   }
 
@@ -39,7 +39,10 @@ export default class Signin extends Component {
         console.log(user))
     return new Promise((resolve, reject) =>
       user.authenticateUser(authenticationDetails, {
-        onSuccess: result =>resolve(),
+        onSuccess: result =>resolve({
+          user,
+          result
+        }),
         onFailure: err => reject(err)
       })    
    
@@ -64,9 +67,9 @@ export default class Signin extends Component {
        this.setState({ isLoading: true });
 
     
-         this.login(this.state.email, this.state.password).then( data => {
-
-            console.log(JSON.stringify(data))                  
+         this.login(this.state.email, this.state.password).then( result => {
+            console.log("LOGIN LOGIN")
+            console.log(JSON.stringify(result))                  
                     
            // window.location.replace("/managers")
           this.props.history.push("/managers");

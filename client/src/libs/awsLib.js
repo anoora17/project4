@@ -3,6 +3,7 @@ import { CognitoUserPool } from "amazon-cognito-identity-js";
 import sigV4Client from "./sigV4Client";
 import config from "../config";
 import candidateAPI from "../utils/candidateAPI";
+
 export async function invokeApig({
   path,
   method = "GET",
@@ -32,8 +33,8 @@ export async function invokeApig({
 
   body = body ? JSON.stringify(body) : body;
   headers = signedRequest.headers;
-  console.log(body)
-  candidateAPI.uploadeCandResume({resume_url:body});
+  console.log(JSON.parse(body).attachment)
+  return{resume_url:JSON.parse(body).attachment};
   const results = await fetch(signedRequest.url, {
     method,
     headers,

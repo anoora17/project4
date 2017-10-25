@@ -1,0 +1,23 @@
+ /*.manager{
+	animation: spin 4s infinite ;
+	height: 10px;
+	width: 20px
+}*/
+h2{
+	font-family: "ProximaNova", "Helvetica Neue", "Helvetica", Roboto, Arial, sans-serif;
+   color:green; 
+   padding-bottom: 30px;
+}
+
+
+@keyframes .manager{ /* CSS3 */
+	0%   { background-color: green; }
+	50%  { background-color: yellow; }
+	100% { background-color: #efefef; }
+}
+
+@-webkit-keyframes .manager{ /* Webkit */
+	0%   { background-color: green; }
+	50%  { background-color: yellow; }
+	100% { background-color: #efefef; }
+}

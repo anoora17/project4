@@ -2,13 +2,15 @@ import React, { Component } from "react";
 import DeleteBtn from "../../components/DeleteBtn";
 import ReviewBtn from "../../components/ReviewBtn";
 import Modal from "../../components/Modal";
-import Jumbotron from "../../components/Jumbotron";
+// import Jumbotron from "../../components/Jumbotron";
 import managerAPI from "../../utils/managerAPI";
 import reviewAPI from "../../utils/reviewAPI";
 import { Link } from "react-router-dom";
 import { Col, Row, Container } from "../../components/Grid";
 import { List, ListItem } from "../../components/List";
 import { Input, TextArea, FormBtn } from "../../components/Form";
+
+import "./Manager.css"
 
 
 class Managers extends Component {
@@ -64,48 +66,16 @@ class Managers extends Component {
     return (
       <Container fluid>
         <Row>
-          <Col size="md-6">
-            <Jumbotron>
-              <h2>Enter New Manager</h2>
-            </Jumbotron>
-            <form>
-              <Input
-                value={this.state.fullname}
-                onChange={this.handleInputChange}
-                name="fullname"
-                placeholder="Name (required)"
-              />
-              <Input
-                value={this.state.department}
-                onChange={this.handleInputChange}
-                name="department"
-                placeholder="Department (required)"
-              />
-              <Input
-                value={this.state.email}
-                onChange={this.handleInputChange}
-                name="email"
-                placeholder="Email (required)"
-              />
-              <Input
-                value={this.state.password}
-                onChange={this.handleInputChange}
-                name="password"
-                placeholder="Password (required)"
-              />
-              <FormBtn
-                disabled={!(this.state.fullname && this.state.department && this.state.email && this.state.password)}
-                onClick={this.handleFormSubmit}
-              >
-                Save Manager
-              </FormBtn>
-            </form>
-          </Col>
-          <Col size="md-6">
-            <Jumbotron>
+          
+          <Col size="md-10">
+            <div>
+            <section className="manager">
+              
               <h2>ACME Inc. Managers</h2>
-            </Jumbotron>
+            </section>
+            </div>
             {this.state.managers.length ? (
+              <div>
               <List>
                 {this.state.managers.map(manager => (
                   
@@ -116,11 +86,12 @@ class Managers extends Component {
                       </strong>
                     </Link>
                     
-                    <DeleteBtn onClick={() => this.deleteManager(manager._id)} />
+                    <DeleteBtn  onClick={() => this.deleteManager(manager._id)} />
                     
                   </ListItem>
                 ))}
               </List>
+              </div>
             ) : (
               <h3>No Managers Available</h3>
             )}

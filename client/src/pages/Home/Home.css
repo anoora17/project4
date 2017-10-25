@@ -1,5 +1,17 @@
-section {
-	background-image: url("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS_7rcMradBDwLerw5oo71wBOAnwpfwllS7DZQqGh4B2rSSaYjJ");
-  height: 100px;
-  width:100px;
+
+body {
+	color:blue;
+}
+
+div h2{
+
+  font-family: "ProximaNova", "Helvetica Neue", "Helvetica", Roboto, Arial, sans-serif;
+  font-size: 16px; 
+  color:black; 
+ 
+     
+}
+
+img .picture{
+	border-radius:15px  5% / 20px ;
 }
