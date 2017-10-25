@@ -1,17 +1,19 @@
 
 body {
-	color:blue;
+	color:#21618C;
 }
 
 div h2{
 
   font-family: "ProximaNova", "Helvetica Neue", "Helvetica", Roboto, Arial, sans-serif;
-  font-size: 16px; 
-  color:black; 
+  font-size: 22px; 
+  color:#21618C; 
  
      
 }
 
-img .picture{
-	border-radius:15px  5% / 20px ;
+.picturetwo{
+	border-radius:15px  ;
+	width: 200px;
+	hight:60%;
 }
