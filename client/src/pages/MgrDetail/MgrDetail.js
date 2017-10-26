@@ -173,7 +173,7 @@ class MgrDetail extends Component {
                   </ListItem>
                 ))}
               </List>
-
+ 
             ) : (
               <h3>No Requisition on file</h3>
             )}
