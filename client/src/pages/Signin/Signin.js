@@ -21,10 +21,13 @@ export default class Signin extends Component {
 
     this.state = {
       email: "",
-      password: ""
+      password: "",
+      manager:[]
       
     };
   }
+
+
 
     login(email, password) {
     const userPool = new CognitoUserPool({
@@ -34,15 +37,24 @@ export default class Signin extends Component {
     const user = new CognitoUser({ Username: email, Pool: userPool });
     const authenticationData = { Username: email, Password: password };
     const authenticationDetails = new AuthenticationDetails(authenticationData);
-      console.log(user)
-      managerAPI.getManagerbyEmail({email:user}).then(
-        console.log(user))
+      console.log(user) 
+      console.log(user.username)
+
     return new Promise((resolve, reject) =>
+
       user.authenticateUser(authenticationDetails, {
-        onSuccess: result =>resolve({
-          user,
-          result
-        }),
+        onSuccess: result => {
+              managerAPI.getManagerbyEmail(authenticationData.Username)
+             .then( res =>{
+              resolve({
+               user,
+              result,
+              manager:res.data
+              })
+      
+           }).catch(err => console.log(err)); 
+
+          },
         onFailure: err => reject(err)
       })    
    
@@ -50,7 +62,14 @@ export default class Signin extends Component {
     );
   }
 
-  
+  // findManager = (email) => {
+  //   managerAPI.getManagerbyEmail(email)
+  //   .then( res => this.setState({manager:res.data}
+
+  //     )
+  //   .catch(err => console.log(err));
+  //       // console.log(JSON.stringfy(manager)))
+  // };
 
   validateForm() {
     return this.state.email.length > 0 && this.state.password.length > 0;
@@ -69,10 +88,11 @@ export default class Signin extends Component {
     
          this.login(this.state.email, this.state.password).then( result => {
             console.log("LOGIN LOGIN")
-            console.log(JSON.stringify(result))                  
+             console.log(JSON.stringify(result))                  
                     
            // window.location.replace("/managers")
-          this.props.history.push("/managers");
+           console.log("email:" +JSON.stringify(this.state) )
+           this.props.history.push("/managers/" + result.manager._id);
           this.props.HandelClick(true);
           this.setState({ isLoading: false });
           

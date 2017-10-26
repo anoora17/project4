@@ -201,11 +201,39 @@ class Candidates extends Component {
     return (
       <Container fluid className="divTable">
       <Row>
-        <div>  
+         
           <Col size="md-12">
+          <div>
             <h2>Candidates in Database</h2>
-            
-            <ReactTable
+            <button className='btn-success' onClick={this.toggleModal}>New Candidate</button>
+            <ReactTable  
+              getTdProps={(state, rowInfo, column, instance) => {
+                return {
+                onClick: (e, handleOriginal) => {
+                  document.location = '/candidates/' + instance.state.data[rowInfo.index]._id;
+                  console.log('A Td Element was clicked!')
+                  console.log('it produced this event:', e)
+                  console.log('It was in this column:', column)
+                  console.log('It was in this row:', rowInfo)
+
+                  console.log('It was in this table instance:', instance)
+ 
+        // IMPORTANT! React-Table uses onClick internally to trigger
+        // events like expanding SubComponents and pivots.
+        // By default a custom 'onClick' handler will override this functionality.
+        // If you want to fire the original onClick handler, call the
+        // 'handleOriginal' function.
+                if (handleOriginal) {
+                  handleOriginal()
+                  console.log(instance.state.data[rowInfo.index]._id);
+
+                }
+                
+
+                
+              }
+            }
+          }} 
           data={this.state.candidates}
           noDataText="No Matches"
           columns={[
@@ -246,27 +274,16 @@ class Candidates extends Component {
           className="-striped -highlight"
         />
   
-                           
+        </div>                   
         </Col>
-        </div>
         </Row>
 
-         <Modal isOpen={this.state.SaveisOpen}
+        <Modal isOpen={this.state.SaveisOpen}
                   onRequestClose={this.toggleModal}
                   contentLabel="Save Successful"
                   style={customStyles}
                   >
-                  <h2>Saved Candidate Data</h2>
-                  <button className="btn btn-success" onClick={this.toggleModal}>close</button>
-                  
-          </Modal>
-
-          <Row>
-          <Col size="md-12">
-            <h2>Enter New Candidate</h2>
-          
-          </Col>
-        </Row>
+                  <h2>Enter New Candidate</h2>
         <form>
         <Row>
           <Col size="md-4">
@@ -368,16 +385,16 @@ class Candidates extends Component {
                 name="resume_text"
                 placeholder="Resume Text (Optional)"
               />
-              <FormBtn
-              disabled={!(this.state.firstname && this.state.lastname && this.state.email && this.state.position_type && this.state.resume_url)}
-                onClick={this.handleFormSubmit}
-              >
-                Submit Candidate
-            </FormBtn>
-            
+              
+            <button className='btn-success' disabled={!(this.state.firstname && this.state.lastname && this.state.email && this.state.position_type && this.state.resume_url)}
+                     onClick={
+                      this.toggleModal,
+                      this.handleFormSubmit}>Save</button>
+            <button className='btn-danger' onClick={this.toggleModalReviewCand}>Cancel</button>
             </Col>
           </Row>
-          </form>
+          </form>                                  
+          </Modal>         
           
       </Container>
     );

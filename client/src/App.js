@@ -46,6 +46,7 @@ render () {
         <Route exact path="/resume" component={Resume} />
         <Route exact path="/managers" component={Manager} />
         <Route exact path="/managers/:id" component={MgrDetail} />
+        <Route exact path="/managers/email/:email" component={MgrDetail} />
         <Route exact path="/jobreq/openreqs/:mgrid" component={MgrDetail} />
         <Route exact path="/candidates" component={Candidates} />
         <Route exact path="/candidates/:id" component={Detail} />
