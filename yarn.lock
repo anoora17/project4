@@ -5890,6 +5890,12 @@ react-animations@^0.1.0:
   version "0.1.0"
   resolved "https://registry.yarnpkg.com/react-animations/-/react-animations-0.1.0.tgz#519b6f4fe0f90b49fbfd4fcd73d978c5087130b1"
 
+react-bootstrap-card@^0.1.5:
+  version "0.1.5"
+  resolved "https://registry.yarnpkg.com/react-bootstrap-card/-/react-bootstrap-card-0.1.5.tgz#5a43af0be6de8a0f59f8eab226345fbbc2cba968"
+  dependencies:
+    classnames "^2.2.3"
+
 react-bootstrap-table@^4.1.0:
   version "4.1.0"
   resolved "https://registry.yarnpkg.com/react-bootstrap-table/-/react-bootstrap-table-4.1.0.tgz#d5df935083d06574404139769a85a56308c01e63"
