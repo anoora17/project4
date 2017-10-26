@@ -30,6 +30,7 @@
     "mongoose": "^4.11.7",
     "mongoose-file": "0.0.2",
     "pdftotextjs": "^0.4.0",
+    "radium": "^0.19.6",
     "react": "^16.0.0",
     "react-bootstrap": "^0.31.3",
     "react-bootstrap-table": "^4.1.0",
