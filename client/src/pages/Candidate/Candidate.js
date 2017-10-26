@@ -143,6 +143,9 @@ class Candidates extends Component {
       console.log(this.state.SaveisOpen);
     };
 
+  
+
+
 
   handleFormSubmit = event => {
     event.preventDefault();
@@ -201,11 +204,16 @@ class Candidates extends Component {
     return (
       <Container fluid className="divTable">
       <Row>
-         
-          <Col size="md-12">
+        <Col size="md-12">
           <div>
             <h2>Candidates in Database</h2>
             <button className='btn-success' onClick={this.toggleModal}>New Candidate</button>
+          </div>
+        </Col>
+      </Row>
+      <Row>
+        <Col size="md-12">
+          <div className="divTable">
             <ReactTable  
               getTdProps={(state, rowInfo, column, instance) => {
                 return {
@@ -264,8 +272,9 @@ class Candidates extends Component {
                 },
                 {
                   Header: "Resume",
+                  id: "resume_url",
                   accessor: "resume_url"
-
+                
                 }
               ]
             }
@@ -273,10 +282,9 @@ class Candidates extends Component {
           defaultPageSize={10}
           className="-striped -highlight"
         />
-  
         </div>                   
         </Col>
-        </Row>
+      </Row>
 
         <Modal isOpen={this.state.SaveisOpen}
                   onRequestClose={this.toggleModal}
@@ -395,7 +403,7 @@ class Candidates extends Component {
           </Row>
           </form>                                  
           </Modal>         
-          
+
       </Container>
     );
   }

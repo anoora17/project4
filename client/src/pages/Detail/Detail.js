@@ -102,6 +102,7 @@ class Detail extends Component {
                 <h4><b>Email:</b></h4><a href="mailto:'+this.state.candidate.email'" >{this.state.candidate.email}</a>
                 <h4><b>Position Type</b><span> </span>{this.state.candidate.position_type} </h4>
                 
+
               
                 </div>
                 <article>
@@ -118,7 +119,7 @@ class Detail extends Component {
                     
           </Col>
 
-        </Row>
+     </Row>
         <Row>
           <Col size="md-6 md-offset-1">
             
@@ -168,18 +169,20 @@ class Detail extends Component {
                 {this.state.reviews.map(reviews => (
                   <ListItem key={reviews._id}>
                     <Link to={"/review/" + reviews._id}>
+                      
                       <strong>
-                        Rated: {reviews.rating} by: {reviews.mgrname} Comments: {reviews.comment}
+                        Rated: {reviews.rating} by: {reviews.reviewername} Comments: {reviews.comment}
                       </strong>
                     </Link>
                     
                     <DeleteBtn onClick={() => this.deleteReview(reviews._id)} />
                   </ListItem>
+
                 ))}
               </List>
 
             ) : (
-              <h3>No Requisition on file</h3>
+              <h3>No Reviews on file</h3>
             )}
           </Col>
         </Row>

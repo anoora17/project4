@@ -16,7 +16,6 @@ module.exports = {
       .catch(err => res.status(422).json(err));
   },
   findByEmail: function(req, res) {
-    console.log("Manager By Email" + req.params.email)
      db.Manager
       .findOne({ email: req.params.email })
       .then(dbModal => res.json(dbModal))
