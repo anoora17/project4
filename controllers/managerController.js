@@ -16,10 +16,11 @@ module.exports = {
       .catch(err => res.status(422).json(err));
   },
   findByEmail: function(req, res) {
+     console.log("email in controller" +req.params.email)
      db.Manager
-      .find({ email: req.params.email })
+      .find({ 'email': req.params.email })
       .then(dbModal => res.json(dbModel))
-      .catch(er => res.status(422).json(err));
+      .catch(err => res.status(422).json(err));
   },
   create: function(req, res) { 
    console.log(req.body)   

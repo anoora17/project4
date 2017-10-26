@@ -62,15 +62,15 @@ class Nav extends Component {
     
         <div className="collapse navbar-collapse" >
           <ul className="nav navbar-nav">
-          { this.props.isAuthenticated
-             ?[ <li className="active" className="nbar"><Link to="/managers"> Managers <span className="sr-only">(current)</span></Link></li>,
-              <li><Link to="/candidates" className="nbar">Candidates</Link></li> ,                         
+          { this.props.isAuthenticated 
+            ?[ <li className="active" className="nbar"><Link to="/managers"> Managers <span className="sr-only">(current)</span></Link></li>,
+              <li><Link to="/candidates" className="nbar">Candidates</Link></li>,                        
               <li><Link to="/managers/:id" className="nbar">My Positions</Link></li>,
-              <li><Link to="/resume" className="nbar">Upload Resumes</Link></li>]
-                           
+              <li><Link to="/resume" className="nbar">Upload Resumes</Link></li>,
+              <li><Link to="/allcand"className="nbar">Search Resumes</Link></li>]
               :<li><Link to="/allcand"className="nbar">Search Resumes</Link></li> 
              }        
-            </ul>
+          </ul>
              
           <ul className="nav navbar-nav navbar-right">        
             <li className="dropdown">

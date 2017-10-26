@@ -103,9 +103,17 @@ class Detail extends Component {
                 
                 Position Type: {this.state.candidate.position_type}
 
+                Resume: {this.state.candidate.resume_url}
+
               </h2>
+              
             </Jumbotron>
+            
           </Col>
+
+        </Row>
+        <Row>
+
         </Row>
         <Row>
           <Col size="md-10 md-offset-1">
@@ -163,18 +171,20 @@ class Detail extends Component {
                 {this.state.reviews.map(reviews => (
                   <ListItem key={reviews._id}>
                     <Link to={"/review/" + reviews._id}>
+                      
                       <strong>
-                        Rated: {reviews.rating} by: {reviews.mgrname} Comments: {reviews.comment}
+                        Rated: {reviews.rating} by: {reviews.reviewername} Comments: {reviews.comment}
                       </strong>
                     </Link>
                     
                     <DeleteBtn onClick={() => this.deleteReview(reviews._id)} />
                   </ListItem>
+
                 ))}
               </List>
 
             ) : (
-              <h3>No Requisition on file</h3>
+              <h3>No Reviews on file</h3>
             )}
           </Col>
         </Row>
