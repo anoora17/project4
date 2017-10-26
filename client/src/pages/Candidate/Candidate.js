@@ -3,7 +3,6 @@ import DeleteBtn from "../../components/DeleteBtn";
 import DelBtn from "../../components/DelBtn";
 import ReviewBtn from "../../components/ReviewBtn";
 import UploadBtn from "../../components/UploadBtn";
-import Jumbotron from "../../components/Jumbotron";
 import Modal from "react-modal";
 import candidateAPI from "../../utils/candidateAPI";
 import reviewAPI from "../../utils/reviewAPI";
@@ -13,7 +12,11 @@ import { List, ListItem } from "../../components/List";
 import { Input, TextArea, FormBtn } from "../../components/Form";
 import ReactTable from "react-table";
 import "react-table/react-table.css";
-
+import "./Candidate.css"
+import { FormGroup, FormControl, ControlLabel,ListGroup  } from "react-bootstrap";
+import LoaderButton from "../../components/LoaderButton";
+import config from "../../config"
+import { invokeApig, s3Upload } from "../../libs/awsLib";
 
 const customStyles = {
   content : {
@@ -43,7 +46,13 @@ class Candidates extends Component {
     resume_url: "",
     resume_text: "",
     resume: "",
-    SaveisOpen: false
+    SaveisOpen: false,
+    //+++++++++++++++
+    isLoading: null,    
+      resume_url:"",
+    resumes:[]
+
+    // ++++++++++++++++++
     
     };
     this.toggleModal = this.toggleModal.bind(this);
@@ -51,9 +60,10 @@ class Candidates extends Component {
   }
 
   componentDidMount() {
-    this.loadCandidates();
+    // console.log(this.props.location.state.resume_url)
+    this.loadCandidates()
   }
-
+  
   loadCandidates = () => {
     candidateAPI.getCandidates()
       .then(res =>
@@ -68,14 +78,32 @@ class Candidates extends Component {
       .catch(err => console.log(err));
   };
 
-  uploadResume = id => {
+  // uploadResume = id => {
     
-    //This is where the new function needs to go
-    //new function
-    candidateAPI.uploadeCandResume(id, "")
-      .then(res => this.loadCandidates())
-      .catch(err => console.log(err));
-  };
+  //   //This is where the new function needs to go
+  //   //new function
+  //   candidateAPI.getuploadeCandResume(id, "")
+  //     .then(res => this.loadCandidates())
+  //     .catch(err => console.log(err));
+  // };
+  async createResume(resume) {
+  const {resume_url} = await invokeApig({
+      path: "/resumes",
+      method: "POST",
+      body: resume
+    });
+    console.log(resume_url)
+    candidateAPI.uploadeCandResume(resume_url)
+    this.setState({resume_url:resume_url})
+  }
+
+
+  resumes() {
+    return invokeApig({ path: "/resume" }).then(result =>{
+      console.log(" Hellooooooooooo"+JSON.stringify(result))
+    });
+
+  }
 
   reviewCandidate = id => {
     //open modal form here
@@ -86,7 +114,21 @@ class Candidates extends Component {
       .catch(err => console.log(err));
 
   };
+   // ++++++++++++++++++
 
+    handleChange = event => {
+    this.setState({
+      [event.target.id]: event.target.value
+    });
+  }
+
+   handleFileChange = event => {
+    this.file = event.target.files[0];
+    console.log(this.file);
+
+  }
+
+    // ++++++++++++++++++
   handleInputChange = event => {
     const { name, value } = event.target;
     this.setState({
@@ -130,14 +172,40 @@ class Candidates extends Component {
     }
   };
 
+    handleSubmit = async event => {
+    event.preventDefault();
 
+    // if (this.file && this.file.size > config.MAX_ATTACHMENT_SIZE) {
+    //   alert("Please pick a file smaller than 5MB");
+    //   return;
+    // }
+
+    this.setState({ isLoading: true });
+    try {
+      const uploadedFilename = this.file
+        ? (await s3Upload(this.file)).Location
+        : null;
+
+      await this.createResume({
+        content: this.state.content,
+        attachment: uploadedFilename
+      });
+
+     // this.props.history.push("/candidate");
+    } catch (e) {
+      //alert(e);
+
+   //   this.props.history.push("/");
+      this.setState({ isLoading: false });
+
+    }
+  }
   render() {
     return (
-      <Container fluid>
+      <Container fluid className="divTable">
       <Row>
-          
-          <Col size="md-12">
-          <div className="divTable">
+        <Col size="md-12">
+          <div>
             <h2>Candidates in Database</h2>
             <button className='btn-success' onClick={this.toggleModal}>New Candidate</button>
             <ReactTable  
@@ -208,13 +276,11 @@ class Candidates extends Component {
           defaultPageSize={10}
           className="-striped -highlight"
         />
-  
-          </div>                 
-        </Col>
-        
+        </div>                   
+      </Col>
         </Row>
 
-         <Modal isOpen={this.state.SaveisOpen}
+        <Modal isOpen={this.state.SaveisOpen}
                   onRequestClose={this.toggleModal}
                   contentLabel="Save Successful"
                   style={customStyles}
@@ -291,12 +357,26 @@ class Candidates extends Component {
               />
             </Col>
             <Col size="md-4">
-              <Input
-                value={this.state.resume_url}
-                onChange={this.handleInputChange}
-                name="resume_url"
-                placeholder="Resume URL (required)"
-              />
+            <form onSubmit={this.handleSubmit}>
+              <FormGroup controlId="file">
+             <ControlLabel>Attachment</ControlLabel>
+                <FormControl onChange={this.handleFileChange} type="file" />
+               </FormGroup>
+                  <LoaderButton className="Resumebtn"
+                    bsStyle ="info"
+                    type="submit"
+                    isLoading={this.state.isLoading}
+                    text="Create"
+                    loadingText="Creating…"
+                    />          
+           <ListGroup>
+            {!this.state.isLoading && this.state.resume_url}
+           </ListGroup>
+        </form>
+
+        <a href={this.state.resume_url}> Uploaded Document
+        
+        </a>
             </Col>
           </Row>
           <Row>
@@ -316,9 +396,8 @@ class Candidates extends Component {
             </Col>
           </Row>
           </form>                                  
-          </Modal>
+          </Modal>         
 
-          
       </Container>
     );
   }

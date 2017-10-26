@@ -20,4 +20,7 @@ router
   .put(candidateController.update)
   .delete(candidateController.remove);
 
+router
+.route("/resupload")
+.post(candidateController.update);
 module.exports = router;

@@ -81,7 +81,7 @@ export default class Signup extends Component {
       );
         //window.location.replace("/login")
       this.props.HandelClick(true);
-      this.props.history.push("/");
+      this.props.history.push("/login");
     } catch (e) {
       alert(e);
       this.setState({ isLoading: false });

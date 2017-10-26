@@ -94,7 +94,7 @@ class Detail extends Component {
       <Container fluid>
         <Row>
           <Col size="md-12">
-            <Jumbotron>
+            
               <h2>
 
                 Candidate: {this.state.candidate.firstname} {this.state.candidate.lastname}
@@ -106,9 +106,8 @@ class Detail extends Component {
                 Resume: {this.state.candidate.resume_url}
 
               </h2>
-              
-            </Jumbotron>
-            
+              <a href={this.state.candidate.resume_url} ><button className="btn btn-info"> View Resume</button></a>
+           
           </Col>
 
         </Row>

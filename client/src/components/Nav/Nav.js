@@ -1,11 +1,10 @@
 import React from "react";
 import { Component } from "react";
 import { withRouter, Route, Link} from "react-router-dom";
-import Routes from "../Routenav";
 import "./nav.css";
 import { authUser, signOutUser } from "../../libs/awsLib.js";
-
-import { NavItem } from "react-bootstrap";
+import {Icon} from 'react-fa';
+import { NavItem, Navbar } from "react-bootstrap";
 
 
 /* This section Added By Noor*/
@@ -23,7 +22,7 @@ class Nav extends Component {
     catch(e) {
       alert(e);
     }
-    console.log(" Auth Something else")
+    // console.log(" Auth Something else")
     this.setState({ isAuthenticating: false,  isAuthenticated: true });
   }
 
@@ -62,25 +61,25 @@ class Nav extends Component {
     
         <div className="collapse navbar-collapse" >
           <ul className="nav navbar-nav">
-          { this.props.isAuthenticated 
-            ?[ <li className="active" className="nbar"><Link to="/managers"> Managers <span className="sr-only">(current)</span></Link></li>,
-              <li><Link to="/candidates" className="nbar">Candidates</Link></li>,                        
-              <li><Link to="/managers/:id" className="nbar">My Positions</Link></li>,
-              <li><Link to="/resume" className="nbar">Upload Resumes</Link></li>,
-              <li><Link to="/allcand"className="nbar">Search Resumes</Link></li>]
+          { this.props.isAuthenticated
+             ?[ <li key={4} className="active" className="nbar"><Link to="/managers"> Managers <span className="sr-only">(current)</span></Link></li>,
+              <li><Link key={5}  className="active" to="/candidates" className="nbar">Candidates</Link></li> ,                         
+              <li><Link key={6} to="/managers/:id" className="nbar">My Positions</Link></li>,
+              <li><Link key={7} to="/resume" className="nbar">Upload Resumes</Link></li>,
+              <li><Link key={8} to="/allcand"className="nbar">Search Resumes</Link></li>]
               :<li><Link to="/allcand"className="nbar">Search Resumes</Link></li> 
              }        
           </ul>
              
           <ul className="nav navbar-nav navbar-right">        
-            <li className="dropdown">
+            <li className="dropdown" >
 
               {this.props.isAuthenticated 
-                ? <NavItem onClick={this.handleLogout } className ="Login">Sign Out</NavItem>
+                ? <NavItem onClick={this.handleLogout}><Icon name="cog" spin />Sign Out</NavItem>
               :[<a key={0} data-toggle="dropdown" >Login <span className="caret"></span></a>,
               <ul key={1} className="dropdown-menu">                  
-                    <NavItem><Link key={2} className ="Login" to="/login">Signin</Link></NavItem>                          
-                    <NavItem><Link key={3} className ="Login" to="/signup">Signup</Link></NavItem>
+                    <NavItem><Link key={2}  to="/login">Signin</Link></NavItem>                          
+                    <NavItem><Link key={3}  to="/signup">Signup</Link></NavItem>
                     
              </ul>
              ]}
