@@ -1,15 +1,19 @@
 
+div{
+    color:rgba(10, 85, 44, 0.664) 
+}
 
-
-.ccard {
+.Card {
     /* Add shadows to create the "card" effect */
     box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
     transition: 0.3s;
     text-align: center;
+        width: auto;
+    
 }
 
 /* On mouse-over, add a deeper shadow */
-.ccard:hover {
+.Card:hover {
     box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
 }
 
@@ -18,11 +22,15 @@
     padding: 2px 16px;
 }
 
-a > button {
-	display: block;
-	text-align: center;
+.carButton{
+    background: rgba(223, 142, 21, 0.719);
+    border: 2px solid;
+    border-radius: 25px;
 }
 
-.btn btn-info{
-	float:clear;
+ListItem {
+    height: 60px;
+    padding-top: 20px;
+	padding-bottom: 20px;
 }
+

@@ -18,9 +18,7 @@ class Managers extends Component {
     managers: [],
     fullname: "",
     department: "",
-    email: "",
-    password: ""
-    
+   
     };
 
   componentDidMount() {
@@ -30,7 +28,7 @@ class Managers extends Component {
   loadManagers = () => {
     managerAPI.getManagers()
       .then(res =>
-        this.setState({ managers: res.data, fullname: "", department: "", email: "", password: ""})
+        this.setState({ managers: res.data, fullname: "", department: ""})
       )
       .catch(err => console.log(err));
   };

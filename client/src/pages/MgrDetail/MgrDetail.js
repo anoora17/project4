@@ -9,7 +9,8 @@ import { Col, Row, Container } from "../../components/Grid";
 import { List, ListItem } from "../../components/List";
 import { Input, TextArea, FormBtn } from "../../components/Form";
 import "./MgrDetail.css";
-
+import {Button, CardBlock, Card, CardTitle,bsStyle
+} from "react-bootstrap";
 const customStyles = {
   content : {
     top                   : '50%',
@@ -94,36 +95,41 @@ class MgrDetail extends Component {
   render() {
     return (
       <Container fluid>
-        <Row>
-          <Col size="md-12">
-              <h3>
-               Manager: {this.state.manager.fullname}
-              </h3>
-              <h3> 
-                Email: {this.state.manager.email} 
-              </h3>
-              <h3> 
-                Department: {this.state.manager.department}
-             </h3>
+
+         <Row>
+          <Col size="md-5 md-offset-4">
+            <div className="Card" >             
+              <div className="CardBlock">
+                <h4 className="CardTitle">Manager Profile</h4>
+
+                <p className="CardText"><b> Name:</b> &nbsp;{this.state.manager.fullname}</p>
+                <p className="CardText"><b> email:</b> &nbsp;{this.state.manager.email} </p>
+                <p className="CardText"><b>Department:</b> &nbsp;&nbsp;{this.state.manager.department}</p>
+                <hr/>
+                <p>
+                   <Button className="carButton" onClick={this.toggleModal}>Create Job Profile</Button>     
+                </p>        
+              </div>
+              <div>
+              <hr/>
+                  
+              </div>
+            </div>      
           </Col>
-        </Row>
+     </Row>
+                
         <Row>
-          <Col size="md-10 md-offset-1">
-            <button onClick={this.toggleModal}>Create Job Profile</button>
-          </Col>
-        </Row>
-        
-        <Row>
-          <Col size="md-12">
-            <h2>Requisitions for Manager</h2>
+          <Col size="md-10 sm-offset-1 ">
+            <h2><i>Requisitions for Manager</i></h2>
+
             <Col size="md-12">
             <Modal isOpen={this.state.isOpen}
                   onRequestClose={this.toggleModal}
                   contentLabel="Input Job Profile"
                   style={customStyles}
                   >
-                  <h2>Job Requisition For: {this.state.manager.fullname}</h2>
-                  <h3>Department: {this.state.manager.department}</h3>
+                  <h3>Job Requisition For: {this.state.manager.fullname}</h3>
+                  <h4>Department: {this.state.manager.department}</h4>
                     <form>
                     <Input
                       value={this.state.title}
@@ -165,8 +171,8 @@ class MgrDetail extends Component {
                   <ListItem key={jobreq._id}>
                     <Link to={"/jobreq/" + jobreq._id}>
                       <strong>
-                        {jobreq.title}: {jobreq.description}
-                      </strong>
+                        {jobreq.title}:</strong> {jobreq.description}
+                      
                     </Link>
                     
                     

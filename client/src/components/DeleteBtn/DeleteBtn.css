@@ -1,4 +1,14 @@
-.btn-danger {
+.new {
   float: right;
-  
+  background: rgba(226, 67, 4, 0.719);
+  border: 2px solid;
+  border-radius: 25px;
+  padding: 5px 15px;
+  color: #FFFF;
+  text-align:center;
+
+}
+
+new:hover {
+  box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
 }

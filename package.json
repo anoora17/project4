@@ -34,6 +34,7 @@
     "react": "^16.0.0",
     "react-animations": "^0.1.0",
     "react-bootstrap": "^0.31.3",
+    "react-bootstrap-card": "^0.1.5",
     "react-bootstrap-table": "^4.1.0",
     "react-cards": "^0.2.2",
     "react-data-grid": "^2.0.60",

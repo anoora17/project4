@@ -9,7 +9,9 @@ import reviewAPI from "../../utils/reviewAPI";
 import { List, ListItem } from "../../components/List";
 import { Input, TextArea, FormBtn } from "../../components/Form";
 import Modal from "react-modal";
-import "./Detail.css"
+import "./Detail.css";
+import {Button, CardBlock, Card, CardTitle,bsStyle
+} from "react-bootstrap"
 const customStyles = {
   content : {
     top                   : '50%',
@@ -93,32 +95,26 @@ class Detail extends Component {
     return (
       <Container fluid>
         <Row>
-          <Col size="md-4">
-            
-              <div className="ccard">
-                <h2> Candidate Details</h2>
-                <div className="">
-                <h4><b><span><i><h4><b>First Name:</b></h4>{this.state.candidate.firstname}</i></span><h4><b>Last Name:</b></h4><span><i> {this.state.candidate.lastname}</i></span></b></h4> 
-                <h4><b>Email:</b></h4><a href="mailto:'+this.state.candidate.email'" >{this.state.candidate.email}</a>
-                <h4><b>Position Type</b><span> </span>{this.state.candidate.position_type} </h4>
-                
-
-              
-                </div>
-                <article>
-                <a href={this.state.candidate.resume_url} ><button className="btn btn-info"> View Resume</button></a>
-                  <br/>
-                  <h2>Resume Snippet</h2>
+          <Col size="md-4 md-offset-4">
+            <div className="Card" >             
+              <div className="CardBlock">
+                <h4 className="CardTitle">Candidate Details</h4>
+                <p className="CardText"><b> Name:</b> &nbsp; {this.state.candidate.firstname} &nbsp; {this.state.candidate.lastname}</p>
+                <p className="CardText"><b>Position Type:</b> &nbsp;&nbsp;{this.state.candidate.position_type}</p>
+                <p>
+                 <a href={this.state.candidate.resume_url} ><Button className="carButton" bsSize="small"> View Resume</Button></a>           
+                </p>        
+              </div>
+              <div>
+              <hr/>
+                  <h4>Resume Snippet</h4>
                   <p>
                    {this.state.candidate.resume_text}
                   </p>
-                 <button onClick={this.toggleModalReviewCand}>Submit Review</button>
-              
-               </article>
-              </div>               
-                    
+                 <Button className="carButton" bsSize="small" onClick={this.toggleModalReviewCand}>Submit Review</Button>
+              </div>
+            </div>      
           </Col>
-
      </Row>
         <Row>
           <Col size="md-6 md-offset-1">
@@ -130,6 +126,7 @@ class Detail extends Component {
                   contentLabel="Input Candidate Review"
                   style={customStyles}
                   >
+                  <br/>
                   <h2>Review for Candidate:</h2>
                   <h2>{this.state.candidate.firstname} {this.state.candidate.lastname}</h2>
                   
@@ -161,21 +158,26 @@ class Detail extends Component {
                   </form>
           </Modal>
         <Row>
-          <Col size="md-12">
+          <Col size="md-8 md-offset-1">
+            <br/>
+            <br/>
             <h2>Reviews for Candidate</h2>            
             
             {this.state.reviews.length ? (
               <List>              
                 {this.state.reviews.map(reviews => (
                   <ListItem key={reviews._id}>
+                  <br/>
                     <Link to={"/review/" + reviews._id}>
                       
-                      <strong>
-                        Rated: {reviews.rating} by: {reviews.reviewername} Comments: {reviews.comment}
-                      </strong>
+                     
+                        <b>Rated: </b>{reviews.rating}&nbsp;&nbsp;<b>by:</b> {reviews.reviewername}&nbsp;&nbsp;<b> Comments: </b>{reviews.comment}
+                       
+                      
                     </Link>
                     
                     <DeleteBtn onClick={() => this.deleteReview(reviews._id)} />
+                    <br/>
                   </ListItem>
 
                 ))}
