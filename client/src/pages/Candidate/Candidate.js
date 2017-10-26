@@ -208,6 +208,12 @@ class Candidates extends Component {
           <div>
             <h2>Candidates in Database</h2>
             <button className='btn-success' onClick={this.toggleModal}>New Candidate</button>
+          </div>
+        </Col>
+      </Row>
+      <Row>
+        <Col size="md-12">
+          <div className="divTable">
             <ReactTable  
               getTdProps={(state, rowInfo, column, instance) => {
                 return {
@@ -277,8 +283,8 @@ class Candidates extends Component {
           className="-striped -highlight"
         />
         </div>                   
-      </Col>
-        </Row>
+        </Col>
+      </Row>
 
         <Modal isOpen={this.state.SaveisOpen}
                   onRequestClose={this.toggleModal}

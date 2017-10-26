@@ -58,7 +58,7 @@ class AllCandidates extends Component {
       <Container fluid>
         <Row>
           <Col size="md-12">
-            
+           <div> 
               <h2>Search the Candidate Repo</h2>
            
             <form>
@@ -78,12 +78,13 @@ class AllCandidates extends Component {
                 Search Candidates
               </FormBtn>
             </form>
+            </div>
           </Col>
           </Row>
           
         <Row>
           <Col size="md-12">
-          <div className="divTable">
+            <div className="divTable">
           <ReactTable  
               getTdProps={(state, rowInfo, column, instance) => {
                 return {

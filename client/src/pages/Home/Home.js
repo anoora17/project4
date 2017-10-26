@@ -2,7 +2,6 @@ import React,{ Component }  from "react";
 import { Col, Row, Container } from "../../components/Grid";
 import {bounce} from 'react-animations';
 import Radium, {StyleRoot} from 'radium';
-import animatdiv from "../../components/Section";
 import "./Home.css"
 
 // import Background from '../../img/websites-modern.jpg';
@@ -34,16 +33,16 @@ const Home = () =>
     <Row>
       <Col size="md-12">
         <div className="text-info">
-          <h2>Welcome to ACME Inc</h2>
+          <h2>Welcome to iT Services Resume Database</h2>
           <StyleRoot>
           <Container className="wrapper"  style={styles.bounce}>
           <Row>
             <Col size="md-3">
-             <img className="picturetwo" src={require('../../img/Professional-Services.jpg')} />
+              <img className="picturetwo" src={require('../../img/earthhead.jpg')} />
             </Col>  
             <Col size="md-8">
            
-             <p> ACME is the leading provider of professional staffing services in the Washington DC area. We place top Technology, Finance & Accounting, Sales & Marketing, Recruiting & HR and Administrative professionals with the area’s best employers. Our diverse client base represents a wide range of industries, including technology and media, financial services, professional services, energy & green technology, federal services, education and non-profit organizations.</p>
+             <p> iT Services is the leading provider of professional staffing services in the Washington DC area. We place top Technology, Finance & Accounting, Sales & Marketing, Recruiting & HR and Administrative professionals with the area’s best employers. Our diverse client base represents a wide range of industries, including technology and media, financial services, professional services, energy & green technology, federal services, education and non-profit organizations.</p>
             </Col>
             <br/>
             
@@ -58,10 +57,10 @@ const Home = () =>
             
             <Col size="md-8">
            
-             <p> ACME is the leading provider of professional staffing services in the Washington DC area. We place top Technology, Finance & Accounting, Sales & Marketing, Recruiting & HR and Administrative professionals with the area’s best employers. Our diverse client base represents a wide range of industries, including technology and media, financial services, professional services, energy & green technology, federal services, education and non-profit organizations.</p>
+             <p> </p>
             </Col>
             <Col size="md-3">
-             <img className="picturetwo" src={require('../../img/earthhead.jpg')} />
+             
             </Col>  
             <br/>
             

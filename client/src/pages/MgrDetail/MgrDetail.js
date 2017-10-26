@@ -122,6 +122,8 @@ class MgrDetail extends Component {
                   contentLabel="Input Job Profile"
                   style={customStyles}
                   >
+                  <h2>Job Requisition For: {this.state.manager.fullname}</h2>
+                  <h3>Department: {this.state.manager.department}</h3>
                     <form>
                     <Input
                       value={this.state.title}
@@ -167,7 +169,7 @@ class MgrDetail extends Component {
                       </strong>
                     </Link>
                     
-                    <ReviewBtn onClick={() => this.deleteJobReq(jobreq._id)} />
+                    
                   </ListItem>
                 ))}
               </List>

@@ -54,7 +54,7 @@ class Nav extends Component {
               <span className="icon-bar"></span>
             </button>
             <Link to="/" className="navbar-brand ">
-            ACME Inc. </Link>            
+            iT Services Inc. </Link>            
           
           </div>
 
@@ -65,8 +65,7 @@ class Nav extends Component {
              ?[ <li key={4} className="active" className="nbar"><Link to="/managers"> Managers <span className="sr-only">(current)</span></Link></li>,
               <li><Link key={5}  className="active" to="/candidates" className="nbar">Candidates</Link></li> ,                         
               <li><Link key={6} to="/managers/:id" className="nbar">My Positions</Link></li>,
-              <li><Link key={7} to="/resume" className="nbar">Upload Resumes</Link></li>,
-              <li><Link key={8} to="/allcand"className="nbar">Search Resumes</Link></li>]
+              <li><Link key={7} to="/allcand"className="nbar">Search Resumes</Link></li>]
               :<li><Link to="/allcand"className="nbar">Search Resumes</Link></li> 
              }        
           </ul>
