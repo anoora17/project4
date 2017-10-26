@@ -9,7 +9,7 @@ import reviewAPI from "../../utils/reviewAPI";
 import { List, ListItem } from "../../components/List";
 import { Input, TextArea, FormBtn } from "../../components/Form";
 import Modal from "react-modal";
-
+import "./Detail.css"
 const customStyles = {
   content : {
     top                   : '50%',
@@ -93,31 +93,35 @@ class Detail extends Component {
     return (
       <Container fluid>
         <Row>
-          <Col size="md-12">
+          <Col size="md-4">
             
-              <h2>
-
-                Candidate: {this.state.candidate.firstname} {this.state.candidate.lastname}
+              <div className="ccard">
+                <h2> Candidate Details</h2>
+                <div className="">
+                <h4><b><span><i><h4><b>First Name:</b></h4>{this.state.candidate.firstname}</i></span><h4><b>Last Name:</b></h4><span><i> {this.state.candidate.lastname}</i></span></b></h4> 
+                <h4><b>Email:</b></h4><a href="mailto:'+this.state.candidate.email'" >{this.state.candidate.email}</a>
+                <h4><b>Position Type</b><span> </span>{this.state.candidate.position_type} </h4>
                 
-                Email: {this.state.candidate.email} 
-                
-                Position Type: {this.state.candidate.position_type}
-
-              </h2>
-              <a href={this.state.candidate.resume_url} ><button className="btn btn-info"> View Resume</button></a>
-            
+              
+                </div>
+                <article>
+                <a href={this.state.candidate.resume_url} ><button className="btn btn-info"> View Resume</button></a>
+                  <br/>
+                  <h2>Resume Snippet</h2>
+                  <p>
+                   {this.state.candidate.resume_text}
+                  </p>
+                 <button onClick={this.toggleModalReviewCand}>Submit Review</button>
+              
+               </article>
+              </div>               
+                    
           </Col>
+
         </Row>
         <Row>
-          <Col size="md-10 md-offset-1">
-            <article>
-              <h1>Resume Snippet</h1>
-              <p>
-                {this.state.candidate.resume_text}
-              </p>
-              <button onClick={this.toggleModalReviewCand}>Submit Review</button>
-              
-            </article>
+          <Col size="md-6 md-offset-1">
+            
           </Col>
         </Row>
         <Modal isOpen={this.state.CandisOpen}

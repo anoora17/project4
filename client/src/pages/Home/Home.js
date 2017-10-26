@@ -2,7 +2,7 @@ import React,{ Component }  from "react";
 import { Col, Row, Container } from "../../components/Grid";
 import {bounce} from 'react-animations';
 import Radium, {StyleRoot} from 'radium';
-import animatdiv from "../../components/Section";
+//import animatdiv from "../../components/Section";
 import "./Home.css"
 
 // import Background from '../../img/websites-modern.jpg';
